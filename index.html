@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aiden Kunsch — Mechanical Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0b0d;
+  --surface: #131418;
+  --surface-elev: #1a1c21;
+  --border: #25272d;
+  --text: #e8e8e3;
+  --text-dim: #8a8a83;
+  --text-faint: #4a4c52;
+  --accent: #ff7a45;
+  --grid: rgba(255, 255, 255, 0.025);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 60px 60px;
+  overflow-x: hidden;
+}
+
+section[id] { scroll-margin-top: 80px; }
+
+/* Topbar */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 18px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 100;
+  background: rgba(10, 11, 13, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-left { display: flex; align-items: center; gap: 16px; }
+.brand {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.status {
+  color: var(--text-dim);
+  display: flex; align-items: center; gap: 6px;
+}
+.status::before {
+  content: '●';
+  color: var(--accent);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+.nav { display: flex; align-items: center; gap: 4px; }
+.nav-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 8px 14px;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--text); }
+
+.nav-button {
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.nav-button:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.nav-button .arrow { font-size: 13px; line-height: 1; }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-top: 120px; padding-bottom: 80px;
+  position: relative;
+}
+.hero-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-label::before {
+  content: ''; width: 32px; height: 1px; background: var(--accent);
+}
+.hero h1 {
+  font-family: 'Geist', sans-serif;
+  font-size: clamp(48px, 9vw, 128px);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
+}
+.hero h1 .italic {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.hero-sub {
+  font-size: 18px;
+  color: var(--text-dim);
+  max-width: 560px;
+  margin-bottom: 56px;
+  line-height: 1.65;
+}
+
+/* Spec strip */
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  max-width: 720px;
+}
+.spec {
+  padding: 20px 24px;
+  border-right: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+}
+.spec:last-child { border-right: none; }
+.spec-label {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 6px;
+}
+.spec-value { font-size: 14px; color: var(--text); }
+
+/* Section */
+.section {
+  padding: 120px 0;
+  border-top: 1px solid var(--border);
+}
+.section-header {
+  display: flex; align-items: baseline; gap: 24px;
+  margin-bottom: 64px;
+}
+.section-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent); letter-spacing: 0.1em;
+}
+.section-title {
+  font-family: 'Geist', sans-serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 500; letter-spacing: -0.02em;
+}
+.section-title .italic {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+}
+
+/* About */
+.about-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.photo-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+.photo-frame::before, .photo-frame::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 1px solid var(--accent);
+  z-index: 2;
+}
+.photo-frame::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.photo-frame::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+.profile-photo { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-placeholder {
+  position: absolute; inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-faint);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  gap: 6px;
+  background:
+    linear-gradient(45deg, transparent 49%, var(--border) 49%, var(--border) 51%, transparent 51%) 0 0 / 16px 16px;
+}
+.photo-placeholder .hint {
+  font-size: 9px;
+  color: var(--text-faint);
+  letter-spacing: 0.05em;
+  text-transform: none;
+  margin-top: 4px;
+}
+
+.about-text { font-size: 17px; line-height: 1.75; color: var(--text-dim); max-width: 640px; }
+.about-text p { margin-bottom: 20px; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--text); font-weight: 500; }
+
+.about-meta {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 2;
+}
+.about-meta span { color: var(--accent); margin-right: 12px; }
+
+/* PROJECT — new layout: photo banner on top, meta+content below */
+.project {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  grid-template-rows: auto auto;
+  gap: 40px 64px;
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+}
+.project:last-of-type { border-bottom: 1px solid var(--border); }
+
+/* Project photos (two side-by-side) */
+.project-photos {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.project-photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+.project-photo::before, .project-photo::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 1px solid var(--accent);
+  z-index: 2;
+}
+.project-photo::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.project-photo::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+.project-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.project-meta { font-family: 'JetBrains Mono', monospace; }
+.project-id {
+  font-size: 10px; letter-spacing: 0.1em;
+  color: var(--text-faint); margin-bottom: 16px;
+}
+.project-type {
+  font-size: 12px; color: var(--accent);
+  margin-bottom: 28px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.project-specs {
+  font-size: 12px; color: var(--text-dim); line-height: 2;
+  padding-bottom: 24px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 24px;
+}
+.project-specs span { color: var(--text); }
+
+.skills-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.skills-list { list-style: none; padding: 0; }
+.skills-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 2;
+  color: var(--text);
+}
+.skills-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.project-title {
+  font-family: 'Geist', sans-serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 500; letter-spacing: -0.02em;
+  margin-bottom: 24px; line-height: 1.05;
+}
+.project-desc {
+  font-size: 16px; color: var(--text-dim);
+  line-height: 1.75;
+  max-width: 640px;
+}
+.project-desc p { margin-bottom: 16px; }
+.project-desc p:last-child { margin-bottom: 0; }
+.project-desc em.placeholder {
+  color: var(--text-faint);
+  font-style: italic;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+}
+
+/* Contact / Footer */
+.footer {
+  padding: 80px 0 32px;
+  border-top: 1px solid var(--border);
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 48px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.footer-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  padding: 20px 28px 20px 0;
+  margin-right: 28px;
+  transition: color 0.2s;
+}
+.footer-link:hover { color: var(--accent); }
+.footer-link .arrow { font-size: 11px; margin-left: 6px; color: var(--text-faint); }
+.footer-link:hover .arrow { color: var(--accent); }
+
+.footer-bottom {
+  display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-faint);
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+
+/* Fade in */
+.fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 0.8s ease-out forwards; }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+.d1 { animation-delay: 0.1s; } .d2 { animation-delay: 0.2s; }
+.d3 { animation-delay: 0.35s; } .d4 { animation-delay: 0.5s; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .photo-frame { max-width: 320px; }
+}
+@media (max-width: 768px) {
+  .container, .topbar { padding-left: 20px; padding-right: 20px; }
+  .topbar { padding-top: 14px; padding-bottom: 14px; }
+  .status { display: none; }
+  .nav-link { padding: 6px 8px; font-size: 10px; }
+  .nav-button { padding: 6px 10px; margin-left: 4px; }
+  .spec-grid { grid-template-columns: repeat(2, 1fr); }
+  .spec:nth-child(2) { border-right: none; }
+  .spec:nth-child(1), .spec:nth-child(2) { border-bottom: 1px solid var(--border); }
+  .project { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; }
+  .project-photos { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+  .section { padding: 80px 0; }
+  .hero { padding-top: 100px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <a href="#top" class="brand">AIDEN KUNSCH</a>
+    <span class="status">AVAILABLE</span>
+  </div>
+  <nav class="nav">
+    <a href="#about" class="nav-link">About</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="https://resume.aidenkunsch.com" target="_blank" rel="noopener" class="nav-link nav-button">Resume <span class="arrow">↗</span></a>
+  </nav>
+</header>
+
+<div class="container" id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label fade-in">Mechanical Engineering / Class of 2029</div>
+    <h1 class="fade-in d1">
+      Aiden Kunsch's<br>
+      Portfolio Page<br>
+    </h1>
+    <p class="hero-sub fade-in d2">
+      First-year mechanical engineering student at Northeastern University with a minor in bioengineering. Focused on medical devices, hardware prototyping, and the intersection of code and aluminum.
+    </p>
+
+    <div class="spec-grid fade-in d3">
+      <div class="spec">
+        <div class="spec-label">College</div>
+        <div class="spec-value">Northeastern</div>
+      </div>
+      <div class="spec">
+        <div class="spec-label">Major</div>
+        <div class="spec-value">Mech. Eng.</div>
+      </div>
+      <div class="spec">
+        <div class="spec-label">Minor</div>
+        <div class="spec-value">Bioeng.</div>
+      </div>
+      <div class="spec">
+        <div class="spec-label">Focus</div>
+        <div class="spec-value">Med Devices</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-header">
+      <span class="section-number">/ 01</span>
+      <h2 class="section-title">About</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="photo-frame">
+        <img src="./headshot.jpg" alt="Aiden Kunsch" class="profile-photo"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="photo-placeholder">
+          <span>Your photo</span>
+          <span class="hint">save as ./photo.jpg</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="about-text">
+          <p>I'm a first-year mechanical engineering student at <strong>Northeastern University</strong>, pursuing a minor in bioengineering. My focus is on <strong>medical devices</strong> — where rigorous mechanical design meets real human stakes.</p>
+          <p>Outside of coursework, I serve as <strong>mechanical lead</strong> for the Northeastern Mars Rover Club and am helping set up a nonprofit biotech incubator makerspace for early-stage hardware founders.</p>
+          <p>I like Arduino, SolidWorks, the smell of cut acrylic, and the moment a prototype finally does the thing.</p>
+        </div>
+
+        <div class="about-meta">
+          <div><span>CAD</span> SolidWorks · Fusion 360</div>
+          <div><span>CODE</span> Python · MATLAB · C/C++</div>
+          <div><span>FAB</span> 3D Printing · Laser Cutting · Electronics</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-header">
+      <span class="section-number">/ 02</span>
+      <h2 class="section-title">Selected <span class="italic">work</span></h2>
+    </div>
+
+    <!-- PROJECT 1: MEDISPENSER -->
+    <article class="project">
+      <div class="project-photos">
+        <div class="project-photo">
+          <img src="./pill-1.jpg" alt="Medispenser project"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder">
+            <span>Medispenser photo 1</span>
+            <span class="hint">save as ./medispenser-1.jpg</span>
+          </div>
+        </div>
+        <div class="project-photo">
+          <img src="./pill-2.png" alt="Medispenser project"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder">
+            <span>Medispenser photo 2</span>
+            <span class="hint">save as ./medispenser-2.jpg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-meta">
+        <div class="project-id">PROJECT_001 — 2026</div>
+        <div class="project-type">Embedded Hardware</div>
+        <div class="project-specs">
+          <div>STATUS &nbsp;&nbsp; <span>Complete</span></div>
+          <div>COURSE &nbsp;&nbsp; <span>Cornerstone 2</span></div>
+        </div>
+        <div class="skills-label">Skills</div>
+        <ul class="skills-list">
+          <li>SolidWorks</li>
+          <li>3D Printing</li>
+          <li>Laser Cutting</li>
+          <li>Mechanical Design</li>
+          <li>Hardware Integration</li>
+          <li>Arduino / C++</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="project-title">Medispenser</h3>
+        <div class="project-desc">
+          <p>An automated pill dispenser for clinical point-of-care use. A scanned RFID card looks up the patient's prescription; three stepper-driven slotted-disk hoppers dispense the correct combination, with an Arduino-controlled LCD guiding the nurse or doctor through the workflow.</p>
+          <p>Built with a team of four for Cornerstone 2. The final prototype achieved <strong>100% dispensing accuracy across 100 trials</strong> of three patient prescriptions, exceeding the 95% design target. Total build cost: ~$95 — orders of magnitude below commercial hospital dispensing cabinets.</p>
+          <p>My contribution was the SolidWorks CAD for the hoppers and backing board, all laser cutting and 3D printing, and the standardized 3D-printed test pills.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 2: HYATT REGENCY WALKWAY COLLAPSE -->
+    <article class="project">
+      <div class="project-photos">
+        <div class="project-photo">
+          <img src="./bridge-1.jpg" alt="Hyatt Regency walkway collapse project"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder">
+            <span>Bridge photo 1</span>
+            <span class="hint">save as ./bridge-1.jpg</span>
+          </div>
+        </div>
+        <div class="project-photo">
+          <img src="./bridge-2.jpg" alt="Hyatt Regency walkway collapse project"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder">
+            <span>Bridge photo 2</span>
+            <span class="hint">save as ./bridge-2.jpg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-meta">
+        <div class="project-id">PROJECT_002 — 2025</div>
+        <div class="project-type">Structural Analysis</div>
+        <div class="project-specs">
+          <div>STATUS &nbsp;&nbsp; <span>Complete</span></div>
+          <div>COURSE &nbsp;&nbsp; <span>Cornerstone 1</span></div>
+        </div>
+        <div class="skills-label">Skills</div>
+        <ul class="skills-list">
+          <li>AutoCAD</li>
+          <li>2D CAD Design</li>
+          <li>Adobe Illustrator</li>
+          <li>Laser Cutting</li>
+          <li>Team Collaboration</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="project-title">Hyatt Regency Walkway Collapse</h3>
+        <div class="project-desc">
+          <p>A three-stage interactive exhibit teaching 4th–5th graders about the Hyatt Regency Walkway Collapse — one of the deadliest structural failures in U.S. history, caused by a single overlooked connection detail in the suspended walkways.</p>
+          <p>Built with a team of three, the exhibit combined a Python narrative game, a laser-cut 2D bridge puzzle showing the original (failed) versus corrected designs, and a Raspberry Pi Pico–driven 3D bridge that physically collapses when overloaded, with LCD weight readout and an LED warning strip.</p>
+          <p>My contribution was the AutoCAD design and laser cutting of the puzzle bridge — modeling both connection variants side-by-side so kids could assemble them and see the difference firsthand.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 3: MARS ROVER -->
+    <article class="project">
+      <div class="project-photos">
+        <div class="project-photo">
+          <img src="./rover-1.jpg" alt="Mars Rover team project"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder">
+            <span>Mars Rover photo 1</span>
+            <span class="hint">save as ./rover-1.jpg</span>
+          </div>
+        </div>
+        <div class="project-photo">
+          <img src="./rover-2.jpg" alt="Mars Rover team project"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder">
+            <span>Mars Rover photo 2</span>
+            <span class="hint">save as ./rover-2.jpg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-meta">
+        <div class="project-id">PROJECT_003 — 2025–PRESENT</div>
+        <div class="project-type">Robotics / Field Systems</div>
+        <div class="project-specs">
+          <div>STATUS &nbsp;&nbsp; <span>Ongoing</span></div>
+          <div>TEAM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>NU Mars Rover</span></div>
+        </div>
+        <div class="skills-label">Skills</div>
+        <ul class="skills-list">
+          <li>SolidWorks</li>
+          <li>3D CAD</li>
+          <li>Hardware Integration</li>
+          <li>Manufacturing</li>
+          <li>Team Leadership</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="project-title">Mars Rover Club</h3>
+        <div class="project-desc">
+          <p><em class="placeholder">[Add your description here.]</em></p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- CONTACT -->
+  <footer class="footer" id="contact">
+    <div class="footer-links">
+      <a class="footer-link" href="mailto:aiden@kunsch.com">Email <span class="arrow">↗</span></a>
+      <a class="footer-link" href="https://www.linkedin.com/in/aiden-kunsch-40674635a" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+      <a class="footer-link" href="#">GitHub <span class="arrow">↗</span></a>
+      <a class="footer-link" href="https://resume.aidenkunsch.com" target="_blank" rel="noopener">Resume <span class="arrow">↗</span></a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Aiden Kunsch</span>
+      <span>Boston, MA / 42.34° N</span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
