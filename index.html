@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0b0d;
-  --surface: #131418;
-  --surface-elev: #1a1c21;
-  --border: #25272d;
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --surface-elev: #171717;
+  --border: #1e1e1e;
   --text: #e8e8e3;
   --text-dim: #8a8a83;
-  --text-faint: #4a4c52;
-  --accent: #ff7a45;
-  --grid: rgba(255, 255, 255, 0.025);
+  --text-faint: #3d3d3d;
+  --accent: #4ade80;
+  --grid: rgba(255, 255, 255, 0.02);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -408,7 +408,7 @@ section[id] { scroll-margin-top: 80px; }
     <a href="#about" class="nav-link">About</a>
     <a href="#projects" class="nav-link">Projects</a>
     <a href="#contact" class="nav-link">Contact</a>
-    <a href="https://resume.aidenkunsch.com" target="_blank" rel="noopener" class="nav-link nav-button">Resume <span class="arrow">↗</span></a>
+    <a href="/resume/" class="nav-link nav-button">Resume</a>
   </nav>
 </header>
 
@@ -448,16 +448,16 @@ section[id] { scroll-margin-top: 80px; }
   <section class="section" id="about">
     <div class="section-header">
       <span class="section-number">/ 01</span>
-      <h2 class="section-title">About</h2>
+      <h2 class="section-title">About Me</h2>
     </div>
 
     <div class="about-grid">
       <div class="photo-frame">
-        <img src="./photo.jpg" alt="Aiden Kunsch" class="profile-photo"
+        <img src="./headshot.jpg" alt="Aiden Kunsch" class="profile-photo"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="photo-placeholder">
           <span>Your photo</span>
-          <span class="hint">save as ./photo.jpg</span>
+          <span class="hint">save as ./headshot.jpg</span>
         </div>
       </div>
 
@@ -469,9 +469,9 @@ section[id] { scroll-margin-top: 80px; }
         </div>
 
         <div class="about-meta">
-          <div><span>CAD</span> SolidWorks · Fusion 360</div>
-          <div><span>CODE</span> Python · MATLAB · C/C++</div>
-          <div><span>FAB</span> 3D Printing · Laser Cutting · Electronics</div>
+          <div><span>CAD</span> SolidWorks · Fusion 360 · AutoCAD</div>
+          <div><span>CODE</span> Python · MATLAB · C++</div>
+          <div><span>HARDWARE</span> 3D Printing · Laser Cutting · Electronics</div>
         </div>
       </div>
     </div>
@@ -488,19 +488,19 @@ section[id] { scroll-margin-top: 80px; }
     <article class="project">
       <div class="project-photos">
         <div class="project-photo">
-          <img src="./medispenser-1.jpg" alt="Medispenser project"
+          <img src="./pill-1.jpg" alt="Medispenser project"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-placeholder">
             <span>Medispenser photo 1</span>
-            <span class="hint">save as ./medispenser-1.jpg</span>
+            <span class="hint">save as ./pill-1.jpg</span>
           </div>
         </div>
         <div class="project-photo">
-          <img src="./medispenser-2.jpg" alt="Medispenser project"
+          <img src="./pill-2.png" alt="Medispenser project"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-placeholder">
             <span>Medispenser photo 2</span>
-            <span class="hint">save as ./medispenser-2.jpg</span>
+            <span class="hint">save as ./pill-2.png</span>
           </div>
         </div>
       </div>
@@ -544,7 +544,7 @@ section[id] { scroll-margin-top: 80px; }
           </div>
         </div>
         <div class="project-photo">
-          <img src="./bridge-2.jpg" alt="Hyatt Regency walkway collapse project"
+          <img src="./bridge-2.png" alt="Hyatt Regency walkway collapse project"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-placeholder">
             <span>Bridge photo 2</span>
@@ -561,10 +561,11 @@ section[id] { scroll-margin-top: 80px; }
         </div>
         <div class="skills-label">Skills</div>
         <ul class="skills-list">
-          <li>AutoCAD</li>
-          <li>2D CAD Design</li>
+          <li>2D CAD Design (AutoCAD)</li>
           <li>Adobe Illustrator</li>
           <li>Laser Cutting</li>
+          <li>Raspberry Pi Pico</li>
+          <li>Python</li>
           <li>Team Collaboration</li>
         </ul>
       </div>
@@ -591,7 +592,7 @@ section[id] { scroll-margin-top: 80px; }
           </div>
         </div>
         <div class="project-photo">
-          <img src="./rover-2.jpg" alt="Mars Rover team project"
+          <img src="./rover-2.png" alt="Mars Rover team project"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-placeholder">
             <span>Mars Rover photo 2</span>
@@ -608,8 +609,7 @@ section[id] { scroll-margin-top: 80px; }
         </div>
         <div class="skills-label">Skills</div>
         <ul class="skills-list">
-          <li>SolidWorks</li>
-          <li>3D CAD</li>
+          <li>3D CAD (SolidWorks)</li>
           <li>Hardware Integration</li>
           <li>Manufacturing</li>
           <li>Team Leadership</li>
@@ -619,7 +619,8 @@ section[id] { scroll-margin-top: 80px; }
       <div>
         <h3 class="project-title">Mars Rover Club</h3>
         <div class="project-desc">
-          <p><em class="placeholder">[Add your description here.]</em></p>
+          <p>As mechanical team lead, I work on designing and integrating various mechanical systems across the rover. Most recently, I redesigned the rover's wheels to improve stiffness and reduce deformation under load, working to ensure that the life detection system safely cleared the ground.</p>
+          <p>I previously worked on a redesign of the gripper to allow for insertion of a USB drive into a mock mars lander. </p>
         </div>
       </div>
     </article>
@@ -630,7 +631,6 @@ section[id] { scroll-margin-top: 80px; }
     <div class="footer-links">
       <a class="footer-link" href="mailto:aiden@kunsch.com">Email <span class="arrow">↗</span></a>
       <a class="footer-link" href="https://www.linkedin.com/in/aiden-kunsch-40674635a" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
-      <a class="footer-link" href="#">GitHub <span class="arrow">↗</span></a>
       <a class="footer-link" href="https://resume.aidenkunsch.com" target="_blank" rel="noopener">Resume <span class="arrow">↗</span></a>
     </div>
     <div class="footer-bottom">
