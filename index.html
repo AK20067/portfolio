@@ -6,7 +6,7 @@
 <title>Aiden Kunsch — Mechanical Engineering Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #0e2340;
@@ -26,7 +26,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
   line-height: 1.5;
   min-height: 100vh;
@@ -44,7 +44,7 @@ section[id] { scroll-margin-top: 80px; }
   position: fixed; top: 0; left: 0; right: 0;
   padding: 18px 40px;
   display: flex; justify-content: flex-end; align-items: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -111,7 +111,7 @@ section[id] { scroll-margin-top: 80px; }
   position: relative;
 }
 .hero-label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 32px;
@@ -121,7 +121,7 @@ section[id] { scroll-margin-top: 80px; }
   content: ''; width: 32px; height: 1px; background: var(--accent);
 }
 .hero h1 {
-  font-family: 'Geist', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: clamp(48px, 9vw, 128px);
   font-weight: 500;
   line-height: 0.95;
@@ -129,7 +129,7 @@ section[id] { scroll-margin-top: 80px; }
   margin-bottom: 32px;
 }
 .hero h1 .italic {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: italic;
   font-weight: 400;
   color: var(--accent);
@@ -159,7 +159,7 @@ section[id] { scroll-margin-top: 80px; }
 .spec {
   padding: 20px 24px;
   border-right: 1px solid var(--border);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
 }
 .spec:last-child { border-right: none; }
 .spec-label {
@@ -178,17 +178,17 @@ section[id] { scroll-margin-top: 80px; }
   margin-bottom: 64px;
 }
 .section-number {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 11px; color: var(--accent); letter-spacing: 0.1em;
 }
 .section-title {
-  font-family: 'Geist', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 500; letter-spacing: -0.03em;
   line-height: 1;
 }
 .section-title .italic {
-  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-family: 'IBM Plex Sans', sans-serif; font-style: italic;
 }
 
 /* About */
@@ -220,7 +220,7 @@ section[id] { scroll-margin-top: 80px; }
   display: none;
   flex-direction: column;
   align-items: center; justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   color: var(--text-faint);
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -246,7 +246,7 @@ section[id] { scroll-margin-top: 80px; }
   margin-top: 32px;
   padding-top: 24px;
   border-top: 1px dashed var(--border);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 12px;
   color: var(--text-dim);
   line-height: 2;
@@ -274,14 +274,14 @@ section[id] { scroll-margin-top: 80px; }
   border-bottom: 1px solid var(--border);
 }
 .project-title {
-  font-family: 'Geist', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: clamp(28px, 4vw, 48px);
   font-weight: 500; letter-spacing: -0.02em;
   line-height: 1.05;
   color: var(--text);
 }
 .project-type-badge {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
   color: var(--accent);
   text-transform: uppercase;
@@ -313,7 +313,7 @@ section[id] { scroll-margin-top: 80px; }
 .project-photo::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
 .project-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.project-meta { font-family: 'JetBrains Mono', monospace; }
+.project-meta { font-family: 'IBM Plex Mono', monospace; }
 .project-specs {
   font-size: 12px; color: var(--text-dim); line-height: 2;
   padding-bottom: 24px;
@@ -354,7 +354,7 @@ section[id] { scroll-margin-top: 80px; }
 .project-desc em.placeholder {
   color: var(--text-faint);
   font-style: italic;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 14px;
 }
 
@@ -362,9 +362,10 @@ section[id] { scroll-margin-top: 80px; }
 .footer {
   padding: 120px 0 48px;
   border-top: 1px solid var(--border);
+  text-align: center;
 }
 .footer-heading {
-  font-family: 'Geist', sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: clamp(40px, 7vw, 88px);
   font-weight: 500;
   letter-spacing: -0.03em;
@@ -373,7 +374,7 @@ section[id] { scroll-margin-top: 80px; }
   color: var(--text);
 }
 .footer-heading .italic {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: italic;
   font-weight: 400;
   color: var(--accent);
@@ -381,20 +382,20 @@ section[id] { scroll-margin-top: 80px; }
 .footer-links {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0;
   margin-bottom: 48px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
 .footer-link {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text);
   text-decoration: none;
-  padding: 20px 28px 20px 0;
-  margin-right: 28px;
+  padding: 28px 40px;
   transition: color 0.2s;
 }
 .footer-link:hover { color: var(--accent); }
@@ -402,8 +403,8 @@ section[id] { scroll-margin-top: 80px; }
 .footer-link:hover .arrow { color: var(--accent); }
 
 .footer-bottom {
-  display: flex; justify-content: space-between;
-  font-family: 'JetBrains Mono', monospace;
+  display: flex; justify-content: center; gap: 40px;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 11px; color: var(--text-faint);
   letter-spacing: 0.05em; text-transform: uppercase;
 }
@@ -430,7 +431,7 @@ section[id] { scroll-margin-top: 80px; }
   .spec:nth-child(1), .spec:nth-child(2) { border-bottom: 1px solid var(--border); }
   .project { grid-template-columns: 1fr; gap: 24px; padding: 48px 0; }
   .project-photos { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; gap: 12px; }
+  .footer-bottom { gap: 16px; }
   .section { padding: 80px 0; }
   .hero { padding-top: 100px; }
 }
@@ -453,7 +454,7 @@ section[id] { scroll-margin-top: 80px; }
   <section class="hero">
     <h1 class="fade-in d1">
       Aiden Kunsch's<br>
-      <span class="hero-sub-title">Engineering Portfolio</span><br>
+      <span class="hero-sub-title">Engineering <span class="italic">Portfolio</span></span><br>
     </h1>
     <p class="hero-sub fade-in d2">
       First-year mechanical engineering student at Northeastern University with a minor in bioengineering. Interested in medical devices, hardware prototyping, robotics engineering, and theme park engineering.
