@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aiden Kunsch — Mechanical Engineering Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -242,22 +244,46 @@ section[id] { scroll-margin-top: 80px; }
 }
 .about-meta span { color: var(--accent); margin-right: 12px; }
 
-/* PROJECT — new layout: photo banner on top, meta+content below */
+/* PROJECT — title spans full width, then photos, then meta+content */
 .project {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  grid-template-rows: auto auto;
-  gap: 40px 64px;
+  grid-template-rows: auto auto auto;
+  gap: 24px 64px;
   padding: 64px 0;
   border-top: 1px solid var(--border);
 }
 .project:last-of-type { border-bottom: 1px solid var(--border); }
 
-/* Project photos (two side-by-side) */
+/* Title row — full width */
+.project-title-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.project-title {
+  font-family: 'Geist', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 500; letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text);
+}
+.project-type-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Photos row — full width, auto-fit handles 2 or 3 */
 .project-photos {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
 }
 .project-photo {
@@ -279,15 +305,6 @@ section[id] { scroll-margin-top: 80px; }
 .project-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .project-meta { font-family: 'JetBrains Mono', monospace; }
-.project-id {
-  font-size: 10px; letter-spacing: 0.1em;
-  color: var(--text-faint); margin-bottom: 16px;
-}
-.project-type {
-  font-size: 12px; color: var(--accent);
-  margin-bottom: 28px;
-  text-transform: uppercase; letter-spacing: 0.08em;
-}
 .project-specs {
   font-size: 12px; color: var(--text-dim); line-height: 2;
   padding-bottom: 24px;
@@ -318,12 +335,6 @@ section[id] { scroll-margin-top: 80px; }
   color: var(--accent);
 }
 
-.project-title {
-  font-family: 'Geist', sans-serif;
-  font-size: clamp(32px, 5vw, 56px);
-  font-weight: 500; letter-spacing: -0.02em;
-  margin-bottom: 24px; line-height: 1.05;
-}
 .project-desc {
   font-size: 16px; color: var(--text-dim);
   line-height: 1.75;
@@ -393,7 +404,7 @@ section[id] { scroll-margin-top: 80px; }
   .spec-grid { grid-template-columns: repeat(2, 1fr); }
   .spec:nth-child(2) { border-right: none; }
   .spec:nth-child(1), .spec:nth-child(2) { border-bottom: 1px solid var(--border); }
-  .project { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; }
+  .project { grid-template-columns: 1fr; gap: 24px; padding: 48px 0; }
   .project-photos { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 12px; }
   .section { padding: 80px 0; }
@@ -463,9 +474,9 @@ section[id] { scroll-margin-top: 80px; }
 
       <div>
         <div class="about-text">
-          <p>I'm a first-year mechanical engineering student at <strong>Northeastern University</strong>, pursuing a minor in bioengineering. My focus is on <strong>medical devices</strong> — where rigorous mechanical design meets real human stakes.</p>
-          <p>Outside of coursework, I serve as <strong>mechanical lead</strong> for the Northeastern Mars Rover Club and am helping set up a nonprofit biotech incubator makerspace for early-stage hardware founders.</p>
-          <p>I like Arduino, SolidWorks, the smell of cut acrylic, and the moment a prototype finally does the thing.</p>
+          <p>I'm a first-year mechanical engineering student at <strong>Northeastern University</strong>, pursuing a minor in bioengineering.</p>
+          <p>Outside of coursework, I serve as <strong>mechanical lead</strong> for the Northeastern Mars Rover Club and am helping set up a nonprofit biotech incubator makerspace for early-stage biomed companies. I am also part of the Northeastern Theme Park Engineering Club, and a member of NEU's chapter of ASME</p>
+          <p>  </p>
         </div>
 
         <div class="about-meta">
@@ -481,11 +492,16 @@ section[id] { scroll-margin-top: 80px; }
   <section class="section" id="projects">
     <div class="section-header">
       <span class="section-number">/ 02</span>
-      <h2 class="section-title">Selected <span class="italic">work</span></h2>
+      <h2 class="section-title">Recent <span class="italic">projects</span></h2>
     </div>
 
     <!-- PROJECT 1: MEDISPENSER -->
     <article class="project">
+      <div class="project-title-row">
+        <h3 class="project-title">Medispenser</h3>
+        <span class="project-type-badge">Embedded Hardware</span>
+      </div>
+
       <div class="project-photos">
         <div class="project-photo">
           <img src="./pill-1.jpg" alt="Medispenser project"
@@ -506,7 +522,6 @@ section[id] { scroll-margin-top: 80px; }
       </div>
 
       <div class="project-meta">
-        <div class="project-type">Embedded Hardware</div>
         <div class="project-specs">
           <div>STATUS &nbsp;&nbsp; <span>Complete</span></div>
           <div>COURSE &nbsp;&nbsp; <span>Cornerstone 2</span></div>
@@ -523,7 +538,6 @@ section[id] { scroll-margin-top: 80px; }
       </div>
 
       <div>
-        <h3 class="project-title">Medispenser</h3>
         <div class="project-desc">
           <p>An automated pill dispenser for clinical point-of-care use. A scanned RFID card looks up the patient's prescription; three stepper-driven slotted-disk hoppers dispense the correct combination, with an Arduino-controlled LCD guiding the nurse or doctor through the workflow.</p>
           <p>Built with a team of four for Cornerstone 2. The final prototype achieved <strong>100% dispensing accuracy across 100 trials</strong> of three patient prescriptions, exceeding the 95% design target. Total build cost: ~$95 — orders of magnitude below commercial hospital dispensing cabinets.</p>
@@ -534,6 +548,11 @@ section[id] { scroll-margin-top: 80px; }
 
     <!-- PROJECT 2: HYATT REGENCY WALKWAY COLLAPSE -->
     <article class="project">
+      <div class="project-title-row">
+        <h3 class="project-title">Hyatt Regency Walkway Collapse</h3>
+        <span class="project-type-badge">Structural Analysis</span>
+      </div>
+
       <div class="project-photos">
         <div class="project-photo">
           <img src="./bridge-1.jpg" alt="Hyatt Regency walkway collapse project"
@@ -548,13 +567,12 @@ section[id] { scroll-margin-top: 80px; }
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-placeholder">
             <span>Bridge photo 2</span>
-            <span class="hint">save as ./bridge-2.jpg</span>
+            <span class="hint">save as ./bridge-2.png</span>
           </div>
         </div>
       </div>
 
       <div class="project-meta">
-        <div class="project-type">Structural Analysis</div>
         <div class="project-specs">
           <div>STATUS &nbsp;&nbsp; <span>Complete</span></div>
           <div>COURSE &nbsp;&nbsp; <span>Cornerstone 1</span></div>
@@ -571,7 +589,6 @@ section[id] { scroll-margin-top: 80px; }
       </div>
 
       <div>
-        <h3 class="project-title">Hyatt Regency Walkway Collapse</h3>
         <div class="project-desc">
           <p>A three-stage interactive exhibit teaching 4th–5th graders about the Hyatt Regency Walkway Collapse — one of the deadliest structural failures in U.S. history, caused by a single overlooked connection detail in the suspended walkways.</p>
           <p>Built with a team of three, the exhibit combined a Python narrative game, a laser-cut 2D bridge puzzle showing the original (failed) versus corrected designs, and a Raspberry Pi Pico–driven 3D bridge that physically collapses when overloaded, with LCD weight readout and an LED warning strip.</p>
@@ -582,6 +599,11 @@ section[id] { scroll-margin-top: 80px; }
 
     <!-- PROJECT 3: MARS ROVER -->
     <article class="project">
+      <div class="project-title-row">
+        <h3 class="project-title">Mars Rover Club</h3>
+        <span class="project-type-badge">Robotics / Field Systems</span>
+      </div>
+
       <div class="project-photos">
         <div class="project-photo">
           <img src="./rover-1.jpg" alt="Mars Rover team project"
@@ -596,13 +618,20 @@ section[id] { scroll-margin-top: 80px; }
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-placeholder">
             <span>Mars Rover photo 2</span>
-            <span class="hint">save as ./rover-2.jpg</span>
+            <span class="hint">save as ./rover-2.png</span>
+          </div>
+        </div>
+        <div class="project-photo">
+          <img src="./rover-3.png" alt="Mars Rover team project"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder">
+            <span>Mars Rover photo 3</span>
+            <span class="hint">save as ./rover-3.jpg</span>
           </div>
         </div>
       </div>
 
       <div class="project-meta">
-        <div class="project-type">Robotics / Field Systems</div>
         <div class="project-specs">
           <div>STATUS &nbsp;&nbsp; <span>Ongoing</span></div>
           <div>TEAM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>NU Mars Rover</span></div>
@@ -617,10 +646,9 @@ section[id] { scroll-margin-top: 80px; }
       </div>
 
       <div>
-        <h3 class="project-title">Mars Rover Club</h3>
         <div class="project-desc">
           <p>As mechanical team lead, I work on designing and integrating various mechanical systems across the rover. Most recently, I redesigned the rover's wheels to improve stiffness and reduce deformation under load, working to ensure that the life detection system safely cleared the ground.</p>
-          <p>I previously worked on a redesign of the gripper to allow for insertion of a USB drive into a mock mars lander. </p>
+          <p>I previously worked on a redesign of the gripper to allow for insertion of a USB drive into a mock mars lander.</p>
         </div>
       </div>
     </article>
