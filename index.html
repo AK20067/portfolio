@@ -9,13 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0a;
-  --surface: #111111;
-  --surface-elev: #171717;
-  --border: #1e1e1e;
+  --bg: #0e2340;
+  --surface: #122a4e;
+  --surface-elev: #163257;
+  --border: #1e3a60;
   --text: #e8e8e3;
-  --text-dim: #8a8a83;
-  --text-faint: #3d3d3d;
+  --text-dim: #a8adb8;
+  --text-faint: #6b7a96;
   --accent: #4ade80;
   --grid: rgba(255, 255, 255, 0.02);
 }
@@ -49,7 +49,7 @@ section[id] { scroll-margin-top: 80px; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   z-index: 100;
-  background: rgba(10, 11, 13, 0.85);
+  background: rgba(14, 35, 64, 0.88);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -73,25 +73,29 @@ section[id] { scroll-margin-top: 80px; }
 
 .nav { display: flex; align-items: center; gap: 4px; }
 .nav-link {
-  color: var(--text-dim);
+  color: var(--text);
   text-decoration: none;
   padding: 8px 14px;
   letter-spacing: 0.08em;
   transition: color 0.2s;
+  font-size: 12px;
 }
-.nav-link:hover { color: var(--text); }
+.nav-link:hover { color: var(--accent); }
 
 .nav-button {
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 8px 14px;
+  color: #0e2340;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 8px 16px;
   margin-left: 8px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   transition: all 0.2s;
+  font-weight: 500;
 }
 .nav-button:hover {
+  background: transparent;
   color: var(--accent);
   border-color: var(--accent);
 }
@@ -130,6 +134,12 @@ section[id] { scroll-margin-top: 80px; }
   font-weight: 400;
   color: var(--accent);
 }
+.hero-sub-title {
+  font-size: clamp(32px, 6vw, 80px);
+  font-weight: 400;
+  color: var(--text-dim);
+  letter-spacing: -0.02em;
+}
 .hero-sub {
   font-size: 18px;
   color: var(--text-dim);
@@ -164,7 +174,7 @@ section[id] { scroll-margin-top: 80px; }
   border-top: 1px solid var(--border);
 }
 .section-header {
-  display: flex; align-items: baseline; gap: 24px;
+  display: flex; flex-direction: column; gap: 10px;
   margin-bottom: 64px;
 }
 .section-number {
@@ -173,8 +183,9 @@ section[id] { scroll-margin-top: 80px; }
 }
 .section-title {
   font-family: 'Geist', sans-serif;
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 500; letter-spacing: -0.02em;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 500; letter-spacing: -0.03em;
+  line-height: 1;
 }
 .section-title .italic {
   font-family: 'Instrument Serif', serif; font-style: italic;
@@ -349,8 +360,23 @@ section[id] { scroll-margin-top: 80px; }
 
 /* Contact / Footer */
 .footer {
-  padding: 80px 0 32px;
+  padding: 120px 0 48px;
   border-top: 1px solid var(--border);
+}
+.footer-heading {
+  font-family: 'Geist', sans-serif;
+  font-size: clamp(40px, 7vw, 88px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 56px;
+  color: var(--text);
+}
+.footer-heading .italic {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
 }
 .footer-links {
   display: flex;
@@ -417,7 +443,7 @@ section[id] { scroll-margin-top: 80px; }
     <a href="#about" class="nav-link">About</a>
     <a href="#projects" class="nav-link">Projects</a>
     <a href="#contact" class="nav-link">Contact</a>
-    <a href="/resume/" class="nav-link nav-button">Resume</a>
+    <a href="https://aidenkunsch.com/resume/" class="nav-link nav-button">Resume</a>
   </nav>
 </header>
 
@@ -427,7 +453,7 @@ section[id] { scroll-margin-top: 80px; }
   <section class="hero">
     <h1 class="fade-in d1">
       Aiden Kunsch's<br>
-      Portfolio Page<br>
+      <span class="hero-sub-title">Portfolio Page</span><br>
     </h1>
     <p class="hero-sub fade-in d2">
       First-year mechanical engineering student at Northeastern University with a minor in bioengineering. Interested in medical devices, hardware prototyping, robotics engineering, and theme park engineering.
@@ -624,7 +650,7 @@ section[id] { scroll-margin-top: 80px; }
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-placeholder">
             <span>Mars Rover photo 3</span>
-            <span class="hint">save as ./rover-3.jpg</span>
+            <span class="hint">save as ./rover-3.png</span>
           </div>
         </div>
       </div>
@@ -654,10 +680,11 @@ section[id] { scroll-margin-top: 80px; }
 
   <!-- CONTACT -->
   <footer class="footer" id="contact">
+    <h2 class="footer-heading">Contact <span class="italic">Information</span></h2>
     <div class="footer-links">
       <a class="footer-link" href="mailto:aiden@kunsch.com">Email <span class="arrow">↗</span></a>
       <a class="footer-link" href="https://www.linkedin.com/in/aiden-kunsch-40674635a" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
-      <a class="footer-link" href="https://aidenkunsch.com/resume" target="_blank" rel="noopener">Resume <span class="arrow">↗</span></a>
+      <a class="footer-link" href="https://aidenkunsch.com/resume/">Resume <span class="arrow">↗</span></a>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Aiden Kunsch</span>
