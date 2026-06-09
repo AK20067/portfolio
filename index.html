@@ -43,7 +43,7 @@ section[id] { scroll-margin-top: 80px; }
 .topbar {
   position: fixed; top: 0; left: 0; right: 0;
   padding: 18px 40px;
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: flex-end; align-items: center;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -404,15 +404,11 @@ section[id] { scroll-margin-top: 80px; }
 <body>
 
 <header class="topbar">
-  <div class="topbar-left">
-    <a href="#top" class="brand">AIDEN KUNSCH</a>
-    <span class="status">AVAILABLE</span>
-  </div>
   <nav class="nav">
     <a href="#about" class="nav-link">About</a>
     <a href="#projects" class="nav-link">Projects</a>
     <a href="#contact" class="nav-link">Contact</a>
-    <a href="https://aidenkunsch.com/resume" target="_blank" rel="noopener" class="nav-link nav-button">Resume <span class="arrow">↗</span></a>
+    <a href="https://resume.aidenkunsch.com" target="_blank" rel="noopener" class="nav-link nav-button">Resume <span class="arrow">↗</span></a>
   </nav>
 </header>
 
@@ -420,7 +416,6 @@ section[id] { scroll-margin-top: 80px; }
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-label fade-in">Mechanical Engineering / Class of 2029</div>
     <h1 class="fade-in d1">
       Aiden Kunsch's<br>
       Portfolio Page<br>
@@ -458,7 +453,7 @@ section[id] { scroll-margin-top: 80px; }
 
     <div class="about-grid">
       <div class="photo-frame">
-        <img src="./headshot.jpg" alt="Aiden Kunsch" class="profile-photo"
+        <img src="./photo.jpg" alt="Aiden Kunsch" class="profile-photo"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="photo-placeholder">
           <span>Your photo</span>
@@ -493,7 +488,7 @@ section[id] { scroll-margin-top: 80px; }
     <article class="project">
       <div class="project-photos">
         <div class="project-photo">
-          <img src="./pill-1.jpg" alt="Medispenser project"
+          <img src="./medispenser-1.jpg" alt="Medispenser project"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-placeholder">
             <span>Medispenser photo 1</span>
@@ -501,7 +496,7 @@ section[id] { scroll-margin-top: 80px; }
           </div>
         </div>
         <div class="project-photo">
-          <img src="./pill-2.png" alt="Medispenser project"
+          <img src="./medispenser-2.jpg" alt="Medispenser project"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-placeholder">
             <span>Medispenser photo 2</span>
@@ -511,7 +506,6 @@ section[id] { scroll-margin-top: 80px; }
       </div>
 
       <div class="project-meta">
-        <div class="project-id">PROJECT_001 — 2026</div>
         <div class="project-type">Embedded Hardware</div>
         <div class="project-specs">
           <div>STATUS &nbsp;&nbsp; <span>Complete</span></div>
@@ -560,7 +554,6 @@ section[id] { scroll-margin-top: 80px; }
       </div>
 
       <div class="project-meta">
-        <div class="project-id">PROJECT_002 — 2025</div>
         <div class="project-type">Structural Analysis</div>
         <div class="project-specs">
           <div>STATUS &nbsp;&nbsp; <span>Complete</span></div>
@@ -608,7 +601,6 @@ section[id] { scroll-margin-top: 80px; }
       </div>
 
       <div class="project-meta">
-        <div class="project-id">PROJECT_003 — 2025–PRESENT</div>
         <div class="project-type">Robotics / Field Systems</div>
         <div class="project-specs">
           <div>STATUS &nbsp;&nbsp; <span>Ongoing</span></div>
@@ -639,7 +631,7 @@ section[id] { scroll-margin-top: 80px; }
       <a class="footer-link" href="mailto:aiden@kunsch.com">Email <span class="arrow">↗</span></a>
       <a class="footer-link" href="https://www.linkedin.com/in/aiden-kunsch-40674635a" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
       <a class="footer-link" href="#">GitHub <span class="arrow">↗</span></a>
-      <a class="footer-link" href="https://aidenkunsch.com/resume" target="_blank" rel="noopener">Resume <span class="arrow">↗</span></a>
+      <a class="footer-link" href="https://resume.aidenkunsch.com" target="_blank" rel="noopener">Resume <span class="arrow">↗</span></a>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Aiden Kunsch</span>
