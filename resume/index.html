@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aiden Kunsch — Resume</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,13 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0a;
-  --surface: #111111;
-  --border: #1e1e1e;
-  --border-soft: #1a1a1a;
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #21262d;
+  --border-soft: #1c2128;
   --text: #e8e8e3;
   --text-dim: #8a8a83;
-  --text-faint: #3d3d3d;
+  --text-faint: #3d4450;
   --accent: #4ade80;
   --accent-soft: rgba(74, 222, 128, 0.08);
 }
@@ -46,7 +44,7 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   z-index: 100;
-  background: rgba(10, 10, 10, 0.85);
+  background: rgba(13, 17, 23, 0.85);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -149,7 +147,46 @@ body {
 }
 .contact-bar span::after { content: none; }
 
-/* Layout — main + sidebar */
+/* Hero photo */
+.hero-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.hero-photo-frame {
+  position: relative;
+  width: 180px;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.hero-photo-frame::before, .hero-photo-frame::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 12px;
+  border: 1px solid var(--accent);
+  z-index: 2;
+}
+.hero-photo-frame::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+.hero-photo-frame::after { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+.hero-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-photo-placeholder {
+  position: absolute; inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-faint);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  gap: 4px;
+  background: linear-gradient(45deg, transparent 49%, var(--border) 49%, var(--border) 51%, transparent 51%) 0 0 / 14px 14px;
+}
+
 .layout {
   display: grid;
   grid-template-columns: 1fr 280px;
@@ -338,6 +375,8 @@ body {
   .topbar { padding-top: 14px; padding-bottom: 14px; }
   .download-btn { padding: 6px 10px; font-size: 10px; }
   .hero { padding-top: 110px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+  .hero-photo-frame { width: 140px; }
   .contact-bar { flex-direction: column; }
   .contact-bar a, .contact-bar span {
     padding: 10px 0;
@@ -375,18 +414,26 @@ body {
   <!-- HERO -->
   <section class="hero">
     <div class="hero-label fade-in">Resume / 2026</div>
-    <h1 class="fade-in d1">
-      Aiden Kunsch
-    </h1>
-    <p class="hero-role fade-in d2">
-      Mechanical Engineering · Northeastern University · Class of 2029
-    </p>
-
-    <div class="contact-bar fade-in d3">
-      <span>Shrewsbury, MA</span>
-      <a href="tel:+15084399512">508-439-9512</a>
-      <a href="mailto:aiden@kunsch.com">aiden@kunsch.com</a>
-      <a href="https://www.linkedin.com/in/aiden-kunsch-40674635a" target="_blank" rel="noopener">LinkedIn</a>
+    <div class="hero-grid fade-in d1">
+      <div class="hero-photo-frame">
+        <img src="../headshot.jpg" alt="Aiden Kunsch"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="hero-photo-placeholder">
+          <span>Photo</span>
+        </div>
+      </div>
+      <div>
+        <h1>Aiden Kunsch</h1>
+        <p class="hero-role">
+          Mechanical Engineering · Northeastern University · Class of 2029
+        </p>
+        <div class="contact-bar">
+          <span>Shrewsbury, MA</span>
+          <a href="tel:+15084399512">508-439-9512</a>
+          <a href="mailto:aiden@kunsch.com">aiden@kunsch.com</a>
+          <a href="https://www.linkedin.com/in/aiden-kunsch-40674635a" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
     </div>
   </section>
 
