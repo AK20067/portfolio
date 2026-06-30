@@ -311,105 +311,321 @@ section[id] { scroll-margin-top: 80px; }
   vertical-align: middle;
 }
 
-/* Project */
+/* Project — staggered card layout */
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
 .project {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 24px 64px;
-  padding: 64px 0;
-  border-top: 1px solid var(--border);
-}
-.project:last-of-type { border-bottom: 1px solid var(--border); }
-
-.project-title-row {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: baseline;
-  gap: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
-}
-.project-title {
-  font-family: 'Sora', sans-serif;
-  font-size: clamp(28px, 4vw, 48px);
-  font-weight: 500; letter-spacing: -0.02em;
-  line-height: 1.05;
-  color: var(--text);
-}
-.project-type-badge {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.project-photos {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-}
-.project-photo {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  border: 1px solid var(--border);
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
   background: var(--surface);
+  border: 1px solid var(--border);
+  position: relative;
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.55);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   overflow: hidden;
 }
-.project-photo::before, .project-photo::after {
+.project:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 36px 80px -24px rgba(0, 0, 0, 0.7);
+  border-color: var(--accent);
+}
+
+/* Corner brackets on the card itself */
+.project::before, .project::after {
   content: '';
   position: absolute;
-  width: 14px; height: 14px;
+  width: 16px; height: 16px;
   border: 1px solid var(--accent);
-  z-index: 2;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.3s;
 }
-.project-photo::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-.project-photo::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
-.project-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.project::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+.project::after { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+.project:hover::before, .project:hover::after { opacity: 1; }
 
-/* Meta column with right border separator */
-.project-meta {
+.project-image {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-elev);
+  min-height: 380px;
+}
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.project:hover .project-image img { transform: scale(1.04); }
+
+.project-content {
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* Flip every other project: image right, content left */
+.project:nth-of-type(even) .project-image { order: 2; }
+.project:nth-of-type(even) .project-content { order: 1; }
+
+.project-meta-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
   font-family: 'IBM Plex Mono', monospace;
-  padding-right: 40px;
-  border-right: 1px solid var(--border);
-}
-.project-specs {
-  font-size: 12px; color: var(--text-dim); line-height: 2;
-  padding-bottom: 24px;
-  border-bottom: 1px dashed var(--border);
-  margin-bottom: 24px;
-}
-.project-specs span { color: var(--text); }
-
-.skills-label {
   font-size: 11px;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.project-type-badge { color: var(--accent); }
+.project-meta-top .divider { color: var(--border); }
+
+.project-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.project-desc {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.project-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.skill-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.project-cta {
+  margin-top: 8px;
+  align-self: flex-start;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--accent);
+  transition: gap 0.2s, color 0.2s, border-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.project-cta:hover {
+  gap: 14px;
+  color: var(--text);
+  border-color: var(--text);
+}
+.project-cta .arrow { transition: transform 0.2s; }
+.project-cta:hover .arrow { transform: translateX(2px); }
+button.project-cta {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  cursor: pointer;
+  font: inherit;
+}
+
+/* Project Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 18, 35, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  max-width: 1000px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+.modal-overlay.active .modal { transform: translateY(0); }
+
+/* Corner brackets on modal */
+.modal::before, .modal::after {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+  border: 1px solid var(--accent);
+  z-index: 3;
+  pointer-events: none;
+}
+.modal::before { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+.modal::after { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+
+.modal-close {
+  position: sticky;
+  top: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  z-index: 5;
+  margin: 14px 14px 0 auto;
+  transition: all 0.2s;
+  float: right;
+}
+.modal-close:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.modal-inner {
+  padding: 56px 56px 56px;
+  clear: both;
+}
+
+.modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 20px;
+}
+.modal-meta .accent { color: var(--accent); }
+.modal-meta .divider { color: var(--border); }
+
+.modal-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+
+.modal-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.modal-photo {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: var(--surface-elev);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.modal-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 48px;
+  align-items: start;
+}
+.modal-desc {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+.modal-desc p { margin-bottom: 16px; }
+.modal-desc p:last-child { margin-bottom: 0; }
+.modal-desc strong { color: var(--text); font-weight: 500; }
+
+.modal-sidebar {
+  padding-left: 32px;
+  border-left: 1px solid var(--border);
+}
+.modal-side-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 14px;
 }
-.skills-list { list-style: none; padding: 0; }
-.skills-list li {
+.modal-skills-list {
+  list-style: none;
+  padding: 0;
+}
+.modal-skills-list li {
   position: relative;
-  padding-left: 18px;
+  padding-left: 16px;
   font-size: 13px;
   line-height: 2;
   color: var(--text);
+  font-family: 'IBM Plex Mono', monospace;
 }
-.skills-list li::before {
+.modal-skills-list li::before {
   content: '—';
   position: absolute;
   left: 0;
   color: var(--accent);
 }
 
-.project-desc {
-  font-size: 16px; color: var(--text-dim);
-  line-height: 1.75;
+body.modal-open { overflow: hidden; }
+
+@media (max-width: 768px) {
+  .modal-inner { padding: 32px 24px; }
+  .modal-body { grid-template-columns: 1fr; gap: 32px; }
+  .modal-sidebar { padding-left: 0; padding-top: 24px; border-left: none; border-top: 1px solid var(--border); }
+  .modal-gallery { grid-template-columns: 1fr; }
 }
-.project-desc p { margin-bottom: 16px; }
-.project-desc p:last-child { margin-bottom: 0; }
 
 /* Contact / Footer — tighter vertical space, more content */
 .footer {
@@ -490,7 +706,13 @@ section[id] { scroll-margin-top: 80px; }
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .photo-frame { max-width: 320px; }
-  .project-meta { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+  .project { grid-template-columns: 1fr; }
+  /* On mobile, image always goes on top regardless of stagger */
+  .project:nth-of-type(even) .project-image { order: 0; }
+  .project:nth-of-type(even) .project-content { order: 0; }
+  .project-image { min-height: 280px; aspect-ratio: 4/3; }
+  .project-content { padding: 40px 32px; }
+  .projects-list { gap: 56px; }
 }
 @media (max-width: 768px) {
   .container { padding-left: 20px; padding-right: 20px; }
@@ -499,8 +721,7 @@ section[id] { scroll-margin-top: 80px; }
   .nav-button { padding: 6px 10px; margin-left: 4px; }
   .hero { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
   .hero-photos { display: none; }
-  .project { grid-template-columns: 1fr; gap: 24px; padding: 48px 0; }
-  .project-photos { grid-template-columns: 1fr; }
+  .project-content { padding: 32px 24px; }
   .footer-bottom { gap: 16px; flex-direction: column; align-items: center; }
   .section { padding: 80px 0; }
   .footer-link { padding: 20px 24px; }
@@ -581,112 +802,193 @@ section[id] { scroll-margin-top: 80px; }
       <h2 class="section-title">Recent <span class="italic">projects</span></h2>
     </div>
 
-    <!-- PROJECT 3: MARS ROVER -->
-    <article class="project">
-      <div class="project-title-row">
-        <h3 class="project-title">Mars Rover Club</h3>
-      </div>
-      <div class="project-photos">
-        <div class="project-photo">
-          <img src="./rover-1.jpg" alt="Mars Rover team project" onerror="this.style.display='none'">
-        </div>
-        <div class="project-photo">
-          <img src="./rover-2.png" alt="Mars Rover team project" onerror="this.style.display='none'">
-        </div>
-        <div class="project-photo">
-          <img src="./rover-3.png" alt="Mars Rover team project" onerror="this.style.display='none'">
-        </div>
-      </div>
-      <div class="project-meta">
-        <div class="project-specs">
-          <div>STATUS &nbsp;&nbsp; <span>Ongoing</span></div>
-          <div>TEAM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>NU Mars Rover</span></div>
-        </div>
-        <div class="skills-label">Skills</div>
-        <ul class="skills-list">
-          <li>3D CAD (SolidWorks)</li>
-          <li>Hardware Integration</li>
-          <li>Manufacturing</li>
-          <li>Team Leadership</li>
-        </ul>
-      </div>
-      <div class="project-desc">
-        <p>As mechanical team co-lead, I work on designing and integrating mechanical systems across the rover. Most recently, I redesigned the rover's wheels to improve stiffness and reduce deformation under load, testing various materials and spoke patterns to find the optimal design.</p>
-        <p>I previously worked on a redesign of the rover's gripper to allow for insertion of a USB drive into a mock mars lander.</p>
-      </div>
-    </article>
-    
-    <!-- PROJECT 1: MEDISPENSER -->
-    <article class="project">
-      <div class="project-title-row">
-        <h3 class="project-title">Medispenser</h3>
-      </div>
-      <div class="project-photos">
-        <div class="project-photo">
-          <img src="./pill-1.jpg" alt="Medispenser project" onerror="this.style.display='none'">
-        </div>
-        <div class="project-photo">
-          <img src="./pill-2.png" alt="Medispenser project" onerror="this.style.display='none'">
-        </div>
-      </div>
-      <div class="project-meta">
-        <div class="project-specs">
-          <div>STATUS &nbsp;&nbsp; <span>Complete</span></div>
-          <div>COURSE &nbsp;&nbsp; <span>Cornerstone 2</span></div>
-        </div>
-        <div class="skills-label">Skills</div>
-        <ul class="skills-list">
-          <li>SolidWorks</li>
-          <li>3D Printing</li>
-          <li>Laser Cutting</li>
-          <li>Mechanical Design</li>
-          <li>Hardware Integration</li>
-          <li>Arduino / C++</li>
-        </ul>
-      </div>
-      <div class="project-desc">
-        <p>An automated pill dispenser designed for use in clinical and assisted care environments. An RFID reader looks up the patient's prescription, and three slotted-disk hoppers driven by steppers dispense the correct combination and dosage, with an Arduino-controlled LCD guiding the nurse or caregiver through the workflow.</p>
-        <p>Built with a team of four for Cornerstone 2. The final prototype achieved <strong>100% dispensing accuracy across 100 trials</strong> of three patient prescriptions, exceeding the 95% initial target. Total build cost: ~$70.</p>
-        <p>For this project I worked on CAD design, 3D printing, and laser cutting. I assembled the Arduino components of the system and programmed the controller using Arduino C++.</p>
-      </div>
-    </article>
+    <div class="projects-list">
 
-    <!-- PROJECT 2: HYATT REGENCY WALKWAY COLLAPSE -->
-    <article class="project">
-      <div class="project-title-row">
-        <h3 class="project-title">Engineering Disaster Game</h3>
-      </div>
-      <div class="project-photos">
-        <div class="project-photo">
-          <img src="./bridge-1.jpg" alt="Hyatt Regency walkway collapse project" onerror="this.style.display='none'">
+      <article class="project">
+        <div class="project-image">
+          <img src="./rover-1.jpg" alt="Northeastern Mars Rover Club" onerror="this.style.display='none'">
         </div>
-        <div class="project-photo">
-          <img src="./bridge-2.png" alt="Hyatt Regency walkway collapse project" onerror="this.style.display='none'">
+        <div class="project-content">
+          <div class="project-meta-top">
+            <span class="project-type-badge">Robotics</span>
+            <span class="divider">/</span>
+            <span>NU Mars Rover</span>
+            <span class="divider">/</span>
+            <span>Ongoing</span>
+          </div>
+          <h3 class="project-title">Mars Rover Club</h3>
+          <p class="project-desc">
+            As mechanical co-lead, I work with an interdisciplinary team to design and integrate mechanical systems across the rover in preparation
+            for the university competitions. Recent work includes a wheel redesign improving stiffness
+            and ground clearance, and improvements to the end effector to improve dexterity for certain tasks.
+          </p>
+          <div class="project-skills">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Hardware Integration</span>
+            <span class="skill-tag">Manufacturing</span>
+            <span class="skill-tag">Team Leadership</span>
+          </div>
+          <button type="button" class="project-cta">Read more <span class="arrow">→</span></button>
         </div>
-      </div>
-      <div class="project-meta">
-        <div class="project-specs">
-          <div>STATUS &nbsp;&nbsp; <span>Complete</span></div>
-          <div>COURSE &nbsp;&nbsp; <span>Cornerstone 1</span></div>
+        <template class="project-modal-data">
+          <div class="modal-meta">
+            <span class="accent">Robotics / Systems Engineering</span>
+            <span class="divider">/</span>
+            <span>NU Mars Rover</span>
+            <span class="divider">/</span>
+            <span>Ongoing</span>
+          </div>
+          <h3 class="modal-title">Mars Rover Club</h3>
+          <div class="modal-gallery">
+            <div class="modal-photo"><img src="./rover-1.jpg" alt="Mars Rover"></div>
+            <div class="modal-photo"><img src="./rover-2.png" alt="Mars Rover detail"></div>
+            <div class="modal-photo"><img src="./rover-3.png" alt="Mars Rover assembly"></div>
+          </div>
+          <div class="modal-body">
+            <div class="modal-desc">
+              <p>As mechanical team co-lead for the <strong>Northeastern Mars Rover Club</strong>, I work on designing and integrating mechanical systems across the rover, coordinating with other subteams for long term projects, and managing task delegation.</p>
+              <p>Most recently, I redesigned the rover's wheels to improve stiffness and reduce deformation under load, testing various materials and spoke patterns to find the optimal design.</p>
+              <p>I also work on the rover's end effector system, some notable projects being a redesign of the rover's gripper to allow for insertion of a USB drive and XLR connector.</p>
+            </div>
+            <div class="modal-sidebar">
+              <div class="modal-side-label">Skills</div>
+              <ul class="modal-skills-list">
+                <li>3D CAD (SolidWorks)</li>
+                <li>Hardware Integration</li>
+                <li>Manufacturing</li>
+                <li>Team Leadership</li>
+              </ul>
+            </div>
+          </div>
+        </template>
+      </article>
+      <article class="project">
+        <div class="project-image">
+          <img src="./pill-1.jpg" alt="Medispenser automated pill dispenser" onerror="this.style.display='none'">
         </div>
-        <div class="skills-label">Skills</div>
-        <ul class="skills-list">
-          <li>2D CAD Design (AutoCAD)</li>
-          <li>Adobe Illustrator</li>
-          <li>Laser Cutting</li>
-          <li>Raspberry Pi Pico</li>
-          <li>Python</li>
-          <li>Team Collaboration</li>
-        </ul>
-      </div>
-      <div class="project-desc">
-        <p>A three-stage interactive exhibit teaching 4th–5th graders about the Hyatt Regency Walkway Collapse — one of the deadliest structural failures in U.S. history, caused by a single overlooked connection detail in the suspended walkways.</p>
-        <p>Built with a team of three, the exhibit combined a Python narrative game, a laser-cut 2D bridge puzzle showing the original (failed) versus corrected designs, and a Raspberry Pi Pico–driven 3D bridge that physically collapses when overloaded, with LCD weight readout and an LED warning strip.</p>
-        <p>My contribution was the AutoCAD design and laser cutting of the puzzle, Pico enclosure, and model bridge. I worked with my teammates to integrate the Pico components and ensure the Python code worked with our model.</p>
-      </div>
-    </article>
+        <div class="project-content">
+          <div class="project-meta-top">
+            <span class="project-type-badge">Embedded Hardware</span>
+            <span class="divider">/</span>
+            <span>Cornerstone 2</span>
+            <span class="divider">/</span>
+            <span>Complete</span>
+          </div>
+          <h3 class="project-title">Medispenser</h3>
+          <p class="project-desc">
+            An automated pill dispenser for clinical and assisted care environments. An RFID reader looks up
+            the patient's prescription, and three slotted-disk hoppers driven by steppers dispense the correct
+            combination and dosage. Achieved <strong style="color:var(--text)">100% accuracy across 100 trials</strong>
+            at a ~$70 build cost.
+          </p>
+          <div class="project-skills">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">3D Printing</span>
+            <span class="skill-tag">Laser Cutting</span>
+            <span class="skill-tag">Arduino / C++</span>
+            <span class="skill-tag">Mechanical Design</span>
+          </div>
+          <button type="button" class="project-cta">Read more <span class="arrow">→</span></button>
+        </div>
+        <template class="project-modal-data">
+          <div class="modal-meta">
+            <span class="accent">Embedded Hardware</span>
+            <span class="divider">/</span>
+            <span>Cornerstone 2</span>
+            <span class="divider">/</span>
+            <span>Complete</span>
+            <span class="divider">/</span>
+            <span>Team of 4</span>
+          </div>
+          <h3 class="modal-title">Medispenser</h3>
+          <div class="modal-gallery">
+            <div class="modal-photo"><img src="./pill-1.jpg" alt="Medispenser"></div>
+            <div class="modal-photo"><img src="./pill-2.png" alt="Medispenser CAD"></div>
+          </div>
+          <div class="modal-body">
+            <div class="modal-desc">
+              <p>An automated pill dispenser designed for use in clinical and assisted care environments. An RFID reader looks up the patient's prescription, and three slotted-disk hoppers driven by steppers dispense the correct combination and dosage, with an Arduino-controlled LCD guiding the nurse or caregiver through the workflow.</p>
+              <p>Built with a team of four for Cornerstone 2. The final prototype achieved <strong>100% dispensing accuracy across 100 trials</strong> of three patient prescriptions, exceeding the 95% initial target. Total build cost: ~$70.</p>
+              <p>For this project I worked on CAD design, 3D printing, and laser cutting. I assembled the Arduino components of the system and programmed the controller using Arduino C++.</p>
+            </div>
+            <div class="modal-sidebar">
+              <div class="modal-side-label">Skills</div>
+              <ul class="modal-skills-list">
+                <li>SolidWorks</li>
+                <li>3D Printing</li>
+                <li>Laser Cutting</li>
+                <li>Mechanical Design</li>
+                <li>Hardware Integration</li>
+                <li>Arduino / C++</li>
+              </ul>
+            </div>
+          </div>
+        </template>
+      </article>
+      <article class="project">
+        <div class="project-image">
+          <img src="./bridge-1.jpg" alt="Hyatt Regency walkway collapse exhibit" onerror="this.style.display='none'">
+        </div>
+        <div class="project-content">
+          <div class="project-meta-top">
+            <span class="project-type-badge">Structural / Exhibit</span>
+            <span class="divider">/</span>
+            <span>Cornerstone 1</span>
+            <span class="divider">/</span>
+            <span>Complete</span>
+          </div>
+          <h3 class="project-title">Engineering Disaster Game</h3>
+          <p class="project-desc">
+            A three-stage interactive exhibit teaching 4th–5th graders about the Hyatt Regency Walkway
+            Collapse. Combines a Python narrative game, a laser-cut bridge puzzle, and a Raspberry Pi Pico–driven
+            3D bridge that physically collapses when overloaded — with LCD readout and an LED warning strip.
+          </p>
+          <div class="project-skills">
+            <span class="skill-tag">AutoCAD</span>
+            <span class="skill-tag">Adobe Illustrator</span>
+            <span class="skill-tag">Laser Cutting</span>
+            <span class="skill-tag">Raspberry Pi Pico</span>
+            <span class="skill-tag">Python</span>
+          </div>
+          <button type="button" class="project-cta">Read more <span class="arrow">→</span></button>
+        </div>
+        <template class="project-modal-data">
+          <div class="modal-meta">
+            <span class="accent">Structural / Interactive Exhibit</span>
+            <span class="divider">/</span>
+            <span>Cornerstone 1</span>
+            <span class="divider">/</span>
+            <span>Complete</span>
+            <span class="divider">/</span>
+            <span>Team of 3</span>
+          </div>
+          <h3 class="modal-title">Engineering Disaster Game</h3>
+          <div class="modal-gallery">
+            <div class="modal-photo"><img src="./bridge-1.jpg" alt="Bridge exhibit"></div>
+            <div class="modal-photo"><img src="./bridge-2.png" alt="Bridge exhibit detail"></div>
+          </div>
+          <div class="modal-body">
+            <div class="modal-desc">
+              <p>A three-stage interactive exhibit teaching 4th–5th graders about the Hyatt Regency Walkway Collapse — one of the deadliest structural failures in U.S. history, caused by a single overlooked connection detail in the suspended walkways.</p>
+              <p>Built with a team of three, the exhibit combined a Python narrative game, a laser-cut 2D bridge puzzle showing the original (failed) versus corrected designs, and a Raspberry Pi Pico–driven 3D bridge that physically collapses when overloaded, with LCD weight readout and an LED warning strip.</p>
+              <p>My contribution was the AutoCAD design and laser cutting of the puzzle, Pico enclosure, and model bridge. I worked with my teammates to integrate the Pico components and ensure the Python code worked with our model.</p>
+            </div>
+            <div class="modal-sidebar">
+              <div class="modal-side-label">Skills</div>
+              <ul class="modal-skills-list">
+                <li>2D CAD (AutoCAD)</li>
+                <li>Adobe Illustrator</li>
+                <li>Laser Cutting</li>
+                <li>Raspberry Pi Pico</li>
+                <li>Python</li>
+                <li>Team Collaboration</li>
+              </ul>
+            </div>
+          </div>
+        </template>
+      </article>
 
-
+    </div>
   </section>
 
   <!-- CONTACT -->
@@ -704,6 +1006,57 @@ section[id] { scroll-margin-top: 80px; }
   </footer>
 
 </div>
+
+<!-- PROJECT MODAL -->
+<div class="modal-overlay" id="project-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="modal" role="document">
+    <button type="button" class="modal-close" aria-label="Close" id="modal-close">✕</button>
+    <div class="modal-inner" id="modal-inner"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const overlay = document.getElementById('project-modal');
+  const inner = document.getElementById('modal-inner');
+  const closeBtn = document.getElementById('modal-close');
+
+  function openModal(template) {
+    inner.innerHTML = '';
+    inner.appendChild(template.content.cloneNode(true));
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    // reset scroll
+    overlay.querySelector('.modal').scrollTop = 0;
+  }
+
+  function closeModal() {
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    // clear after transition
+    setTimeout(() => { inner.innerHTML = ''; }, 300);
+  }
+
+  // Wire up each Read more button
+  document.querySelectorAll('.project').forEach(article => {
+    const btn = article.querySelector('.project-cta');
+    const tpl = article.querySelector('.project-modal-data');
+    if (btn && tpl) {
+      btn.addEventListener('click', () => openModal(tpl));
+    }
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+  });
+})();
+</script>
 
 </body>
 </html>
