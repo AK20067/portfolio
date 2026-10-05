@@ -248,7 +248,7 @@ body {
   position: relative;
   background: var(--surface);
   border: 1px solid var(--border);
-  max-width: 1100px; width: 100%; max-height: 90vh;
+  max-width: 1320px; width: 100%; max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
   transform: translateY(20px);
@@ -286,37 +286,68 @@ body {
   color: var(--text); margin-bottom: 28px;
 }
 
-.modal-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px; margin-bottom: 32px;
+/* Skills strip (replaces the old right sidebar) */
+.modal-skills-strip {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding-bottom: 32px; margin-bottom: 8px;
+  border-bottom: 1px solid var(--border);
 }
-.modal-photo {
-  position: relative; aspect-ratio: 4/3;
-  background: var(--surface-elev); border: 1px solid var(--border);
-  overflow: hidden;
+.modal-skills-strip .skill-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.06em;
+  color: var(--text-dim);
+  border: 1px solid var(--border); padding: 5px 10px;
 }
-.modal-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.modal-body { display: grid; grid-template-columns: 1fr 200px; gap: 48px; align-items: start; }
+/* Alternating text / photo blocks */
+.modal-block {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: center;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+}
+.modal-block:last-child { border-bottom: none; padding-bottom: 8px; }
+/* .reverse puts the photo on the left */
+.modal-block.reverse .modal-block-photo { order: -1; }
+
+.modal-block-heading {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--text); margin-bottom: 14px;
+}
 .modal-desc { font-size: 15px; line-height: 1.75; color: var(--text-dim); }
 .modal-desc p { margin-bottom: 16px; }
 .modal-desc p:last-child { margin-bottom: 0; }
 .modal-desc strong { color: var(--text); font-weight: 500; }
 
-.modal-sidebar { padding-left: 32px; border-left: 1px solid var(--border); }
-.modal-side-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 14px;
+.modal-photo {
+  background: var(--surface-elev); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; padding: 10px;
 }
-.modal-skills-list { list-style: none; padding: 0; }
-.modal-skills-list li {
-  position: relative; padding-left: 16px;
-  font-size: 13px; line-height: 2; color: var(--text);
-  font-family: 'IBM Plex Mono', monospace;
+.modal-photo img {
+  max-width: 100%; max-height: 380px;
+  width: auto; height: auto; object-fit: contain; display: block;
 }
-.modal-skills-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+/* Placeholder for photos not yet added */
+.modal-photo.is-placeholder {
+  border-style: dashed; min-height: 240px;
+  flex-direction: column; gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-faint); text-align: center;
+}
+.modal-photo.is-placeholder span:first-child { font-size: 18px; color: var(--border); }
+
+/* Two-photo grid within a single modal block */
+.modal-photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 900px) {
+  .modal-photo-grid { grid-template-columns: 1fr; }
+}
 
 body.modal-open { overflow: hidden; }
 
@@ -343,9 +374,8 @@ body.modal-open { overflow: hidden; }
   .project-image { min-height: 240px; aspect-ratio: 4/3; }
   .project-content { padding: 28px 24px; }
   .modal-inner { padding: 28px 24px; }
-  .modal-body { grid-template-columns: 1fr; gap: 32px; }
-  .modal-sidebar { padding-left: 0; padding-top: 24px; border-left: none; border-top: 1px solid var(--border); }
-  .modal-gallery { grid-template-columns: 1fr; }
+  .modal-block { grid-template-columns: 1fr; gap: 24px; padding: 28px 0; }
+  .modal-block.reverse .modal-block-photo { order: 0; }
 }
 @media (max-width: 768px) {
   .container, .topbar { padding-left: 20px; padding-right: 20px; }
@@ -390,7 +420,7 @@ body.modal-open { overflow: hidden; }
   <!-- PROJECT BREAKDOWN -->
   <section class="section" id="subprojects">
     <div class="section-header">
-      <h2 class="section-title">Project Breakdown</h2>
+      <h2 class="section-title">My Projects</h2>
     </div>
 
     <div class="projects-list">
@@ -423,23 +453,55 @@ body.modal-open { overflow: hidden; }
             <span>Complete</span>
           </div>
           <h3 class="modal-title">Wheel Redesign</h3>
-          <div class="modal-gallery">
-            <div class="modal-photo"><img src="../rover-3.png" alt="Wheel redesign detail"></div>
+
+          <div class="modal-skills-strip">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">FDM Printing</span>
+            <span class="skill-tag">Materials Selection</span>
+            <span class="skill-tag">Iterative Testing</span>
           </div>
-          <div class="modal-body">
-            <div class="modal-desc">
-              <p>The rover's original wheels deformed under load and lost traction on loose or uneven terrain — a recurring issue during field testing. I led a redesign focused on improving stiffness and ground clearance without adding significant weight.</p>
-              <p>I tested multiple spoke geometries and materials in SolidWorks, iterating on spoke count, rim thickness, and hub interface to find a design that balanced stiffness against traction and mass. Prototypes were manufactured with FDM printing to validate fit before committing to final materials.</p>
-              <p>The result is a stiffer wheel with better ground clearance, reducing deformation under load while keeping the traction profile the terrain requires.</p>
+
+          <!-- BLOCK 1 — text left / photo right -->
+          <div class="modal-block">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Background</h4>
+              <div class="modal-desc">
+                <p>The rover's original wheels deformed under load and would interfere with ground clearance the life detection system — an issue that we ran into during the competition in Utah. I redesigned the wheels to improve stiffness and ground clearance without adding significant weight or hindering traction.</p>
+              </div>
             </div>
-            <div class="modal-sidebar">
-              <div class="modal-side-label">Skills</div>
-              <ul class="modal-skills-list">
-                <li>SolidWorks</li>
-                <li>FDM Printing</li>
-                <li>Materials Selection</li>
-                <li>Iterative Testing</li>
-              </ul>
+            <div class="modal-block-photo">
+              <div class="modal-photo"><img src="../rover-4.jpeg" alt="Wheel redesign detail"></div>
+            </div>
+          </div>
+
+          <!-- BLOCK 2 — photo left / text right -->
+          <div class="modal-block reverse">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Design &amp; Testing</h4>
+              <div class="modal-desc">
+                <p>I tested multiple spoke geometries, iterating on spoke count, rim thickness, and hub interface to find a design that balanced stiffness, traction, and weight. I 3D printed fixtures to test deformation under load for various filament types, including different varieties of TPU-95A, and used those results to find the best filament for the final wheels.</p>
+              </div>
+            </div>
+            <div class="modal-block-photo">
+              <div class="modal-photo"><img src="../rover-5.jpeg" alt="Wheel redesign detail"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCK 3 — text left / photo right (now a 2-photo grid) -->
+          <div class="modal-block">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Result</h4>
+              <div class="modal-desc">
+                <p>After a design and material had been selected, I manufactured the wheels on a large format FDM 3D printer. The result is a stiffer wheel with better ground clearance that doesn't deform and interfere with systems on the rover.</p>
+              </div>
+            </div>
+            <div class="modal-block-photo">
+              <div class="modal-photo-grid">
+                <div class="modal-photo"><img src="../rover-3.png" alt="Wheel redesign detail"></div>
+                <div class="modal-photo"><img src="../wheel.jpeg" alt="Finished wheel"></div>
+              </div>
+              </div>
             </div>
           </div>
         </template>
@@ -473,23 +535,110 @@ body.modal-open { overflow: hidden; }
             <span>Complete</span>
           </div>
           <h3 class="modal-title">End Effector / Gripper</h3>
-          <div class="modal-gallery">
-            <div class="modal-photo"><img src="../rover-2.png" alt="Gripper / end effector detail"></div>
+
+          <div class="modal-skills-strip">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Mechanism Design</span>
+            <span class="skill-tag">Hardware Integration</span>
+            <span class="skill-tag">FDM Printing</span>
           </div>
-          <div class="modal-body">
-            <div class="modal-desc">
-              <p>The competition's equipment servicing task requires the rover to plug connectors — including a USB drive and an XLR connector — into a mock lander panel, which demands more dexterity and alignment tolerance than the original gripper design allowed.</p>
-              <p>I redesigned the end effector to widen its insertion tolerance and improve alignment feedback, reworking the jaw geometry and actuation linkage so the gripper could reliably seat both connector types without requiring pixel-perfect positioning from the drive team.</p>
-              <p>Hardware mounts for the power distribution board, cameras, and controllers on the rover were also part of this integration work, designed in SolidWorks and manufactured with FDM printing.</p>
+
+          <!-- BLOCK 1 — text left / photo right -->
+          <div class="modal-block">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Background</h4>
+              <div class="modal-desc">
+                <p>The competition's equipment servicing task requires the rover to plug connectors — including a USB drive and an XLR connector — into a mock lander panel, which demands more dexterity and alignment tolerance than the original gripper design allowed.</p>
+              </div>
             </div>
-            <div class="modal-sidebar">
-              <div class="modal-side-label">Skills</div>
-              <ul class="modal-skills-list">
-                <li>SolidWorks</li>
-                <li>Mechanism Design</li>
-                <li>Hardware Integration</li>
-                <li>FDM Printing</li>
-              </ul>
+            <div class="modal-block-photo">
+              <div class="modal-photo"><img src="../rover-2.png" alt="Gripper / end effector detail"></div>
+            </div>
+          </div>
+
+          <!-- BLOCK 2 — photo left / text right (placeholder replaced with XLR photo) -->
+          <div class="modal-block reverse">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Design & Result</h4>
+              <div class="modal-desc">
+                <p>I redesigned the end effector to allow for insertion of a USB C cable at the University Rover Challenge, and insertion of an XLR cable at the Canadian International Rover Challenge. The design used M2 fasteners and heat set inserts to secure the XLR cable to the end effector. At the competition, I succesfully inserted the XLR cable into a linux terminal, which gained the team points for completion of that task.</p>
+              </div>
+            </div>
+            <div class="modal-block-photo">
+              <div class="modal-photo"><img src="../XLR.jpeg" alt="XLR connector insertion"></div>
+            </div>
+          </div>
+            </div>
+          </div>
+        </template>
+      </article>
+
+      <!-- SWERVE DRIVE -->
+      <article class="project">
+        <div class="project-image">
+          <img src="../swerve-1.jpg" alt="Over-wheel swerve drive redesign" onerror="this.style.display='none'">
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">Over-Wheel Swerve Drive</h3>
+          <p class="project-desc">
+            Redesigning the rover's swerve drive into an over-wheel configuration, shortening the moment
+            arm on the steering motor to reduce load and moving the motor controller up off the ground
+            for better reliability.
+          </p>
+          <div class="project-skills">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Mechanism Design</span>
+            <span class="skill-tag">Load Analysis</span>
+            <span class="skill-tag">In Progress</span>
+          </div>
+          <button type="button" class="project-cta">Read more <span class="arrow">→</span></button>
+        </div>
+        <template class="project-modal-data">
+          <div class="modal-meta">
+            <span class="accent">Mechanism Design</span>
+            <span class="divider">/</span>
+            <span>Swerve Drive</span>
+            <span class="divider">/</span>
+            <span>In Progress</span>
+          </div>
+          <h3 class="modal-title">Over-Wheel Swerve Drive</h3>
+
+          <div class="modal-skills-strip">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Mechanism Design</span>
+            <span class="skill-tag">Load Analysis</span>
+          </div>
+
+          <!-- BLOCK 1 — text left / photo right -->
+          <div class="modal-block">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Background</h4>
+              <div class="modal-desc">
+                <p>The current swerve drive mounts the steering motor below the wheel, near the ground. This puts the full steering load on a long moment arm and leaves the motor controller exposed to dirt, water, and impacts at wheel height — a reliability risk during competition.</p>
+              </div>
+            </div>
+            <div class="modal-block-photo">
+              <div class="modal-photo is-placeholder">
+                <span>📷</span>
+                <span>CAD render coming soon</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCK 2 — photo left / text right -->
+          <div class="modal-block reverse">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Design Approach</h4>
+              <div class="modal-desc">
+                <p>Moving the drive over the wheel shortens the moment arm between the steering axis and the motor, cutting the torque the motor has to resist and reducing wear on the steering assembly. It also lifts the motor controller up off the ground plane, away from dust and debris, improving reliability in the field.</p>
+                <p>This project is currently in progress — CAD and prototype photos will be added as the design is finalized.</p>
+              </div>
+            </div>
+            <div class="modal-block-photo">
+              <div class="modal-photo is-placeholder">
+                <span>📷</span>
+                <span>Prototype photo coming soon</span>
+              </div>
             </div>
           </div>
         </template>
