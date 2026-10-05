@@ -562,6 +562,43 @@ button.project-cta {
   object-fit: cover;
   display: block;
 }
+.modal-gallery.single-wide {
+  grid-template-columns: 1fr;
+}
+.modal-photo-wide {
+  aspect-ratio: 1512 / 787;
+}
+
+/* Skills strip (alternative to the modal-sidebar, used by block-style modals) */
+.modal-skills-strip {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding-bottom: 32px; margin-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-skills-strip .skill-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.06em;
+  color: var(--text-dim);
+  border: 1px solid var(--border); padding: 5px 10px;
+}
+
+/* Alternating text / photo blocks */
+.modal-block {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: center;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+}
+.modal-block:last-child { border-bottom: none; padding-bottom: 8px; }
+.modal-block.modal-block-full { grid-template-columns: 1fr; }
+/* .reverse puts the photo on the left */
+.modal-block.reverse .modal-block-photo { order: -1; }
+
+.modal-block-heading {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--text); margin-bottom: 14px;
+}
 
 .modal-body {
   display: grid;
@@ -616,6 +653,8 @@ body.modal-open { overflow: hidden; }
   .modal-body { grid-template-columns: 1fr; gap: 32px; }
   .modal-sidebar { padding-left: 0; padding-top: 24px; border-left: none; border-top: 1px solid var(--border); }
   .modal-gallery { grid-template-columns: 1fr; }
+  .modal-block { grid-template-columns: 1fr; gap: 24px; padding: 28px 0; }
+  .modal-block.reverse .modal-block-photo { order: 0; }
 }
 
 /* Contact / Footer — tighter vertical space, more content */
@@ -724,6 +763,7 @@ body.modal-open { overflow: hidden; }
 <header class="topbar">
   <nav class="nav">
     <a href="#about" class="nav-link">About</a>
+    <a href="#experience" class="nav-link">Experience</a>
     <a href="#projects" class="nav-link">Projects</a>
     <a href="#contact" class="nav-link">Contact</a>
     <a href="https://aidenkunsch.com/resume/" class="nav-link nav-button">Resume ↗</a>
@@ -787,10 +827,117 @@ body.modal-open { overflow: hidden; }
     </div>
   </section>
 
+  <!-- WORK EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="section-header">
+      <h2 class="section-title">Work Experience </h2>
+    </div>
+
+    <div class="projects-list">
+
+      <article class="project">
+        <div class="project-image">
+          <!-- TITLE PHOTO: add makerspace/MBI photo here -->
+          <img src="./rendering.jpg" alt="Massachusetts Biomedical Initiatives — Builder's Lab" onerror="this.style.display='none'">
+        </div>
+        <div class="project-content">
+          <div class="project-meta-top">
+            <span class="project-type-badge">Operations Intern</span>
+            <span class="divider">/</span>
+            <span>Massachusetts Biomedical Initiatives</span>
+            <span class="divider">/</span>
+            <span>Apr – Sep 2026</span>
+          </div>
+          <h3 class="project-title">Builder's Lab Makerspace</h3>
+          <p class="project-desc">
+            Led equipment research and selection, layout planning, and doccumentation for Builder's Lab, a shared
+            prototyping space for early stage medical device startups at MBI.
+          </p>
+          <div class="project-skills">
+            <span class="skill-tag">Technical Writing</span>
+            <span class="skill-tag">Fusion 360 CAM</span>
+            <span class="skill-tag">Equipment Procurement</span>
+            <span class="skill-tag">Document Automation</span>
+            <span class="skill-tag">Safety Compliance</span>
+            <span class="skill-tag">Brand Design</span>
+          </div>
+          <button type="button" class="project-cta">Read more <span class="arrow">→</span></button>
+        </div>
+        <template class="project-modal-data">
+          <div class="modal-meta">
+            <span class="accent">Operations Intern</span>
+            <span class="divider">/</span>
+            <span>Massachusetts Biomedical Initiatives</span>
+            <span class="divider">/</span>
+            <span>Worcester, MA</span>
+            <span class="divider">/</span>
+            <span>Apr – Sep 2026</span>
+          </div>
+          <h3 class="modal-title">Builder's Lab Makerspace</h3>
+
+          <div class="modal-skills-strip">
+            <span class="skill-tag">Technical Writing</span>
+            <span class="skill-tag">Fusion 360 CAM</span>
+            <span class="skill-tag">Equipment Procurement</span>
+            <span class="skill-tag">Document Automation</span>
+            <span class="skill-tag">Safety Compliance</span>
+            <span class="skill-tag">Brand Design</span>
+          </div>
+
+          <!-- BLOCK 1 — text left / photo right -->
+          <div class="modal-block">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Background</h4>
+              <div class="modal-desc">
+                <p>Builder's Lab is a shared prototyping and instrumentation space MBI is building for early-stage biotech and diagnostics companies — 6–8 companies, 21 people, spanning 3D printing, CNC, laser cutting, and electronics benches. As an intern working on the buildout, I led the equipment documentation, space layout planning, and several procurement decisions ahead of the space opening.</p>
+              </div>
+            </div>
+            <div class="modal-block-photo">
+              <!-- POP-OUT PHOTO: add one makerspace photo here (1512x787) -->
+              <div class="modal-photo modal-photo-wide"><img src="./layout.png" alt="Builder's Lab makerspace"></div>
+            </div>
+          </div>
+
+          <!-- BLOCK 2 — Documentation & Tooling (text only, full width) -->
+          <div class="modal-block modal-block-full">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Documentation &amp; Tooling</h4>
+              <div class="modal-desc">
+                <p>Wrote standard operating procedures for the Bambu Lab P2S/H2D 3D printers, desktop CNC mill, and the Formlabs Form 4 resin printer — each covering safety, workflow, and troubleshooting to a consistent in-house format. Also worked through facility safety requirements (PPE, waste-stream separation for resin printing, OSHA eyewash/shower requirements) to make sure the SOPs reflected lab safety requierments.</p>
+                <p>Designed a layout for the makerspace in Adobe Illustrator, mapping out the most efficient locations for lab benches, prototyping equipment, and shared spaces. Calculated electrical requierments for each area, and specified outlet locations and which outlets should be on dedicated circuts. 
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCK 3 — Equipment Research & Decisions (text only, full width) -->
+          <div class="modal-block modal-block-full">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Equipment Research &amp; Decisions</h4>
+              <div class="modal-desc">
+                <p>Undertook equipment selection with comparative research and use case analysis. Evaluated desktop CNC mills, laser cutters, 3D printers, and electronics equipment on software usability and shared-space practicality, meeting with engineers to discuss what equipment would be useful for med device prototyping. Coordinated with vendors and priced out prototyping equipment, finding the best value equipment for the space.Through vendor selection and equipment selection, I reduced the equipment cost by 60% compared to the original proposal.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCK 4 — Result (text only, full width) -->
+          <div class="modal-block modal-block-full">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Result</h4>
+              <div class="modal-desc">
+                <p>The lab is set to open later this year, providing early stage medical device companies with a space for prototyping and device assembly.</p>
+              </div>
+            </div>
+          </div>
+        </template>
+      </article>
+
+    </div>
+  </section>
+
   <!-- PROJECTS -->
   <section class="section" id="projects">
     <div class="section-header">
-      <h2 class="section-title">Recent <span class="italic">projects</span></h2>
+      <h2 class="section-title">Recent Projects</h2>
     </div>
 
     <div class="projects-list">
