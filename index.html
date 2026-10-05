@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aiden Kunsch — Mechanical Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e2340;
+  --surface: #122a4e;
+  --surface-elev: #163257;
+  --border: #1e3a60;
+  --text: #e8e8e3;
+  --text-dim: #a8adb8;
+  --text-faint: #6b7a96;
+  --accent: #4ade80;
+  --grid: rgba(255, 255, 255, 0.02);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 60px 60px;
+  overflow-x: hidden;
+}
+
+section[id] { scroll-margin-top: 80px; }
+
+/* Topbar — simplified, spaced links + solid green Resume */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 18px 40px;
+  display: flex; justify-content: flex-end; align-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 100;
+  background: rgba(14, 35, 64, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav { display: flex; align-items: center; gap: 4px; }
+.nav-link {
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 16px;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+  font-size: 13px;
+}
+.nav-link:hover { color: var(--accent); }
+
+.nav-button {
+  color: #0e2340;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 8px 18px;
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: 'IBM Plex Mono', monospace;
+  text-decoration: none;
+}
+.nav-button:hover {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+
+/* Hero — two-column with scroll cue */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  position: relative;
+  isolation: isolate;
+  /* break out of .container to go full width */
+  width: 100vw;
+  margin-left: calc(-1 * (100vw - 100%) / 2);
+  padding-left: calc((100vw - 1280px) / 2 + 40px);
+  padding-right: calc((100vw - 1280px) / 2 + 40px);
+}
+/* photo layer */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('./backsplash.jpg');
+  background-size: cover;
+  background-position: center center;
+  z-index: -2;
+  pointer-events: none;
+}
+/* dark tint + bottom fade layer */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--bg) 0%,
+      rgba(14, 35, 64, 0.78) 12%,
+      rgba(14, 35, 64, 0.78) 55%,
+      rgba(14, 35, 64, 0.94) 80%,
+      var(--bg) 100%
+    );
+  z-index: -1;
+  pointer-events: none;
+}
+.hero-left { display: flex; flex-direction: column; justify-content: center; }
+
+.hero h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(48px, 9vw, 128px);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  /* full white for both lines */
+  color: var(--text);
+  margin-bottom: 32px;
+}
+.hero h1 .italic {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+/* subtitle same weight/color as h1 line */
+.hero-sub-title {
+  font-size: clamp(32px, 6vw, 80px);
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+/* visual break between title and paragraph */
+.hero-sub {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 520px;
+  line-height: 1.7;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+/* scroll cue */
+.scroll-cue {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  animation: fadeIn 0.8s ease-out 0.8s both;
+}
+.scroll-cue::after {
+  content: '';
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--text-faint), transparent);
+}
+
+/* Hero photo cluster */
+.hero-photos {
+  position: relative;
+  height: 600px;
+  margin-top: 80px;
+}
+.hero-photo {
+  position: absolute;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.hero-photo:nth-child(1) {
+  width: 290px; height: 220px;
+  top: 40px; left: 10px;
+  transform: rotate(-3deg);
+}
+.hero-photo:nth-child(2) {
+  width: 240px; height: 310px;
+  top: 110px; right: -20px;
+  transform: rotate(2.5deg);
+}
+.hero-photo:nth-child(3) {
+  width: 260px; height: 260px;
+  bottom: 40px; left: 55px;
+  transform: rotate(1.5deg);
+  background: transparent;
+  border-color: transparent;
+}
+
+/* Section */
+.section {
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+}
+.section-header {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 64px;
+  color: #fc8905;
+}
+.section-number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--accent); letter-spacing: 0.1em;
+}
+.section-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 500; letter-spacing: -0.03em;
+  line-height: 1;
+  align-items: center;
+  text-align: center;
+}
+.section-title .italic {
+  font-family: 'IBM Plex Sans', sans-serif; font-style: italic;
+}
+
+/* About */
+.about-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.photo-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+.photo-frame::before, .photo-frame::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 1px solid var(--accent);
+  z-index: 2;
+}
+.photo-frame::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.photo-frame::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+.profile-photo { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.about-text { font-size: 17px; line-height: 1.75; color: var(--text-dim); max-width: 640px; }
+.about-text p { margin-bottom: 20px; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--text); font-weight: 500; }
+
+/* About meta — bumped up, clearer labels */
+.about-meta {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--border);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 2.2;
+}
+.about-meta span {
+  color: var(--accent);
+  margin-right: 14px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* Project — staggered card layout */
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.project {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  position: relative;
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.55);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  overflow: hidden;
+}
+.project:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 36px 80px -24px rgba(0, 0, 0, 0.7);
+  border-color: var(--accent);
+}
+
+/* Corner brackets on the card itself */
+.project::before, .project::after {
+  content: '';
+  position: absolute;
+  width: 16px; height: 16px;
+  border: 1px solid var(--accent);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.project::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+.project::after { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+.project:hover::before, .project:hover::after { opacity: 1; }
+
+.project-image {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-elev);
+  min-height: 380px;
+}
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.project:hover .project-image img { transform: scale(1.04); }
+
+.project-content {
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* Flip every other project: image right, content left */
+.project:nth-of-type(even) .project-image { order: 2; }
+.project:nth-of-type(even) .project-content { order: 1; }
+
+.project-meta-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.project-type-badge { color: var(--accent); }
+.project-meta-top .divider { color: var(--border); }
+
+.project-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.project-desc {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.project-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.skill-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.project-cta {
+  margin-top: 8px;
+  align-self: flex-start;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--accent);
+  transition: gap 0.2s, color 0.2s, border-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.project-cta:hover {
+  gap: 14px;
+  color: var(--text);
+  border-color: var(--text);
+}
+.project-cta .arrow { transition: transform 0.2s; }
+.project-cta:hover .arrow { transform: translateX(2px); }
+button.project-cta {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  cursor: pointer;
+}
+
+/* Project Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 18, 35, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  max-width: 1000px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+.modal-overlay.active .modal { transform: translateY(0); }
+
+/* Corner brackets on modal */
+.modal::before, .modal::after {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+  border: 1px solid var(--accent);
+  z-index: 3;
+  pointer-events: none;
+}
+.modal::before { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+.modal::after { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+
+.modal-close {
+  position: sticky;
+  top: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  z-index: 5;
+  margin: 14px 14px 0 auto;
+  transition: all 0.2s;
+  float: right;
+}
+.modal-close:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.modal-inner {
+  padding: 56px 56px 56px;
+  clear: both;
+}
+
+.modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 20px;
+}
+.modal-meta .accent { color: var(--accent); }
+.modal-meta .divider { color: var(--border); }
+
+.modal-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+
+.modal-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.modal-photo {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: var(--surface-elev);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.modal-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.modal-gallery.single-wide {
+  grid-template-columns: 1fr;
+}
+.modal-photo-wide {
+  aspect-ratio: 1512 / 787;
+}
+
+/* Skills strip (alternative to the modal-sidebar, used by block-style modals) */
+.modal-skills-strip {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding-bottom: 32px; margin-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-skills-strip .skill-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.06em;
+  color: var(--text-dim);
+  border: 1px solid var(--border); padding: 5px 10px;
+}
+
+/* Alternating text / photo blocks */
+.modal-block {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: center;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+}
+.modal-block:last-child { border-bottom: none; padding-bottom: 8px; }
+.modal-block.modal-block-full { grid-template-columns: 1fr; }
+/* .reverse puts the photo on the left */
+.modal-block.reverse .modal-block-photo { order: -1; }
+
+.modal-block-heading {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--text); margin-bottom: 14px;
+}
+
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 48px;
+  align-items: start;
+}
+.modal-desc {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+.modal-desc p { margin-bottom: 16px; }
+.modal-desc p:last-child { margin-bottom: 0; }
+.modal-desc strong { color: var(--text); font-weight: 500; }
+
+.modal-sidebar {
+  padding-left: 32px;
+  border-left: 1px solid var(--border);
+}
+.modal-side-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.modal-skills-list {
+  list-style: none;
+  padding: 0;
+}
+.modal-skills-list li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 2;
+  color: var(--text);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.modal-skills-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+body.modal-open { overflow: hidden; }
+
+@media (max-width: 768px) {
+  .modal-inner { padding: 32px 24px; }
+  .modal-body { grid-template-columns: 1fr; gap: 32px; }
+  .modal-sidebar { padding-left: 0; padding-top: 24px; border-left: none; border-top: 1px solid var(--border); }
+  .modal-gallery { grid-template-columns: 1fr; }
+  .modal-block { grid-template-columns: 1fr; gap: 24px; padding: 28px 0; }
+  .modal-block.reverse .modal-block-photo { order: 0; }
+}
+
+/* Contact / Footer — tighter vertical space, more content */
+.footer {
+  padding: 40px 0 48px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.footer-heading {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(40px, 7vw, 88px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 40px;
+  color: var(--text);
+}
+.footer-heading .italic {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.footer-link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  padding: 28px 40px;
+  transition: color 0.2s;
+}
+.footer-link:hover { color: var(--accent); }
+.footer-link .arrow { font-size: 11px; margin-left: 6px; color: var(--text-faint); }
+.footer-link:hover .arrow { color: var(--accent); }
+
+.footer-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+  line-height: 1.8;
+}
+
+.footer-bottom {
+  display: flex; justify-content: center; gap: 40px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--text-faint);
+  letter-spacing: 0.05em; text-transform: uppercase;
+  padding-top: 24px;
+ 
+}
+
+/* Fade in */
+.fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 0.8s ease-out forwards; }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+.d1 { animation-delay: 0.1s; } .d2 { animation-delay: 0.2s; }
+.d3 { animation-delay: 0.35s; } .d4 { animation-delay: 0.5s; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; padding-bottom: 60px; padding-left: 40px; padding-right: 40px; }
+  .hero-photos { height: 380px; margin-top: 40px; }
+  .hero-photo:nth-child(1) { width: 200px; height: 150px; top: 30px; left: 10px; }
+  .hero-photo:nth-child(2) { width: 200px; height: 220px; top: 60px; right: 10px; }
+  .hero-photo:nth-child(3) { width: 185px; height: 140px; bottom: 20px; left: 50px; }
+  .scroll-cue { display: none; }
+}
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .photo-frame { max-width: 320px; }
+  .project { grid-template-columns: 1fr; }
+  /* On mobile, image always goes on top regardless of stagger */
+  .project:nth-of-type(even) .project-image { order: 0; }
+  .project:nth-of-type(even) .project-content { order: 0; }
+  .project-image { min-height: 280px; aspect-ratio: 4/3; }
+  .project-content { padding: 40px 32px; }
+  .projects-list { gap: 56px; }
+}
+@media (max-width: 768px) {
+  .container { padding-left: 20px; padding-right: 20px; }
+  .topbar { padding-left: 20px; padding-right: 20px; }
+  .nav-link { padding: 6px 8px; font-size: 10px; }
+  .nav-button { padding: 6px 10px; margin-left: 4px; }
+  .hero { padding-top: 100px; padding-left: 20px; padding-right: 20px; }
+  .hero-photos { display: none; }
+  .project-content { padding: 32px 24px; }
+  .footer-bottom { gap: 16px; flex-direction: column; align-items: center; }
+  .section { padding: 80px 0; }
+  .footer-link { padding: 20px 24px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <nav class="nav">
+    <a href="#about" class="nav-link">About</a>
+    <a href="#experience" class="nav-link">Experience</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="https://aidenkunsch.com/resume/" class="nav-link nav-button">Resume ↗</a>
+  </nav>
+</header>
+
+<div class="container" id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="fade-in d1">
+        Aiden Kunsch's<br>
+        <span class="hero-sub-title"> <span class="italic">Portfolio</span></span>
+      </h1>
+      <p class="hero-sub fade-in d2">
+        Second-year mechanical engineering student at Northeastern University pursuing a minor in bioengineering. Areas of interest incldude medical devices and instrumentation, hardware prototyping, robotics engineering, and themed attraction engineering.
+      </p>
+    </div>
+
+    <div class="hero-photos fade-in d3">
+      <div class="hero-photo">
+        <img src="./rover-full.JPG" alt="Mars Rover project" onerror="this.style.display='none'">
+      </div>
+      <div class="hero-photo">
+        <img src="./TPEC.jpeg" alt="Theme Park Engineering Club" onerror="this.style.display='none'">
+      </div>
+      <div class="hero-photo">
+        <img src="./pill-3.png" alt="Medispenser project" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <div class="scroll-cue">Scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-header">
+      <h2 class="section-title">About Me</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="photo-frame">
+        <img src="./headshot.jpg" alt="Aiden Kunsch" class="profile-photo"
+             onerror="this.style.display='none'">
+      </div>
+
+      <div>
+        <div class="about-text">
+          <p>I'm a second year mechanical engineering student at <strong>Northeastern University</strong>, pursuing a minor in bioengineering.</p>
+          <p>Outside of coursework, I serve as <strong>mechanical co-lead</strong> for the Northeastern Mars Rover Team and am working with a nonprofit biotech incubator to set up a makerspace for early-stage medical device companies. I am also a memeber of the Northeastern Theme Park Engineering Club, and participate in NEU's chapter of ASME.</p>
+          <p>Outside of engineering, I love traveling, skiing, performing music (🎺), and exploring Boston.</p>
+        </div>
+
+        <div class="about-meta">
+          <div><span>CAD</span> SolidWorks · Fusion 360 · AutoCAD</div>
+          <div><span>Code</span> Python · MATLAB · C++/Arduino</div>
+          <div><span>Hardware</span> 3D Printing · Laser Cutting · CNC Machining · Embedded Hardware &amp; Microcontrollers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="section-header">
+      <h2 class="section-title">Work Experience </h2>
+    </div>
+
+    <div class="projects-list">
+
+      <article class="project">
+        <div class="project-image">
+          <!-- TITLE PHOTO: add makerspace/MBI photo here -->
+          <img src="./rendering.jpg" alt="Massachusetts Biomedical Initiatives — Builder's Lab" onerror="this.style.display='none'">
+        </div>
+        <div class="project-content">
+          <div class="project-meta-top">
+            <span class="project-type-badge">Operations Intern</span>
+            <span class="divider">/</span>
+            <span>Massachusetts Biomedical Initiatives</span>
+            <span class="divider">/</span>
+            <span>Apr – Sep 2026</span>
+          </div>
+          <h3 class="project-title">Builder's Lab Makerspace</h3>
+          <p class="project-desc">
+            Led equipment research and selection, layout planning, and doccumentation for Builder's Lab, a shared
+            prototyping space for early stage medical device startups at MBI.
+          </p>
+          <div class="project-skills">
+            <span class="skill-tag">Technical Writing</span>
+            <span class="skill-tag">Fusion 360 CAM</span>
+            <span class="skill-tag">Equipment Procurement</span>
+            <span class="skill-tag">Document Automation</span>
+            <span class="skill-tag">Safety Compliance</span>
+            <span class="skill-tag">Brand Design</span>
+          </div>
+          <button type="button" class="project-cta">Read more <span class="arrow">→</span></button>
+        </div>
+        <template class="project-modal-data">
+          <div class="modal-meta">
+            <span class="accent">Operations Intern</span>
+            <span class="divider">/</span>
+            <span>Massachusetts Biomedical Initiatives</span>
+            <span class="divider">/</span>
+            <span>Worcester, MA</span>
+            <span class="divider">/</span>
+            <span>Apr – Sep 2026</span>
+          </div>
+          <h3 class="modal-title">Builder's Lab Makerspace</h3>
+
+          <div class="modal-skills-strip">
+            <span class="skill-tag">Technical Writing</span>
+            <span class="skill-tag">Fusion 360 CAM</span>
+            <span class="skill-tag">Equipment Procurement</span>
+            <span class="skill-tag">Document Automation</span>
+            <span class="skill-tag">Safety Compliance</span>
+            <span class="skill-tag">Brand Design</span>
+          </div>
+
+          <!-- BLOCK 1 — text left / photo right -->
+          <div class="modal-block">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Background</h4>
+              <div class="modal-desc">
+                <p>Builder's Lab is a shared prototyping and instrumentation space MBI is building for early-stage medical device and diagnostics companies — 6–8 companies, 21 people, spanning 3D printing, CNC, laser cutting, and electronics benches. As an intern working on the buildout, I led the equipment documentation, space layout planning, and several procurement decisions ahead of the space opening.</p>
+              </div>
+            </div>
+            <div class="modal-block-photo">
+              <!-- POP-OUT PHOTO: add one makerspace photo here (1512x787) -->
+              <div class="modal-photo modal-photo-wide"><img src="./layout.png" alt="Builder's Lab makerspace"></div>
+            </div>
+          </div>
+
+          <!-- BLOCK 2 — Documentation & Tooling (text only, full width) -->
+          <div class="modal-block modal-block-full">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Documentation &amp; Tooling</h4>
+              <div class="modal-desc">
+                <p>Wrote standard operating procedures for the Bambu Lab P2S/H2D 3D printers, desktop CNC mill, and the Formlabs Form 4 resin printer — each covering safety, workflow, and troubleshooting to a consistent in-house format. Also worked through facility safety requirements (PPE, waste-stream separation for resin printing, OSHA eyewash/shower requirements) to make sure the SOPs reflected lab safety requierments.</p>
+                <p>Designed a layout for the makerspace in Adobe Illustrator, mapping out the most efficient locations for lab benches, prototyping equipment, and shared spaces. Calculated electrical requierments for each area, and specified outlet locations and which outlets should be on dedicated circuts. 
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCK 3 — Equipment Research & Decisions (text only, full width) -->
+          <div class="modal-block modal-block-full">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Equipment Research &amp; Decisions</h4>
+              <div class="modal-desc">
+                <p>Undertook equipment selection with comparative research and use case analysis. Evaluated desktop CNC mills, laser cutters, 3D printers, and electronics equipment on software usability and shared-space practicality, meeting with engineers to discuss what equipment would be useful for med device prototyping. Coordinated with vendors and priced out prototyping equipment, finding the best value equipment for the space.Through vendor selection and equipment selection, I reduced the equipment cost by 60% compared to the original proposal.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCK 4 — Result (text only, full width) -->
+          <div class="modal-block modal-block-full">
+            <div class="modal-block-text">
+              <h4 class="modal-block-heading">Result</h4>
+              <div class="modal-desc">
+                <p>The lab is set to open later this year, providing early stage medical device companies with a space for prototyping and device assembly.</p>
+              </div>
+            </div>
+          </div>
+        </template>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-header">
+      <h2 class="section-title">Recent Projects</h2>
+    </div>
+
+    <div class="projects-list">
+
+      <article class="project">
+        <div class="project-image">
+          <img src="./rover-1.jpg" alt="Northeastern Mars Rover Club" onerror="this.style.display='none'">
+        </div>
+        <div class="project-content">
+          <div class="project-meta-top">
+            <span class="project-type-badge">Robotics</span>
+            <span class="divider">/</span>
+            <span>NU Mars Rover</span>
+            <span class="divider">/</span>
+            <span>Ongoing</span>
+          </div>
+          <h3 class="project-title">Mars Rover Team</h3>
+          <p class="project-desc">
+            As mechanical co-lead, I work with an interdisciplinary team to design and integrate mechanical systems across the rover in preparation
+            for university competitions. Recent work includes a wheel redesign improving stiffness
+            and ground clearance, and modifications to the end effector to improve dexterity for certain tasks.
+          </p>
+          <div class="project-skills">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Hardware Integration</span>
+            <span class="skill-tag">Manufacturing</span>
+            <span class="skill-tag">Team Leadership</span>
+          </div>
+          <a href="https://aidenkunsch.com/rover/" class="project-cta">Learn More <span class="arrow">→</span></a>
+        </div>
+      </article>
+      <article class="project">
+        <div class="project-image">
+          <img src="./pill-1.jpg" alt="Medispenser automated pill dispenser" onerror="this.style.display='none'">
+        </div>
+        <div class="project-content">
+          <div class="project-meta-top">
+            <span class="project-type-badge">Embedded Hardware</span>
+            <span class="divider">/</span>
+            <span>Cornerstone 2</span>
+            <span class="divider">/</span>
+            <span>Complete</span>
+          </div>
+          <h3 class="project-title">Medispenser</h3>
+          <p class="project-desc">
+            An automated pill dispenser for clinical and assisted care environments. An RFID reader looks up
+            the patient's prescription, and three slotted-disk hoppers driven by steppers dispense the correct
+            combination and dosage. Achieved <strong style="color:var(--text)">100% accuracy across 100 trials</strong>
+            at a ~$70 build cost.
+          </p>
+          <div class="project-skills">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">3D Printing</span>
+            <span class="skill-tag">Laser Cutting</span>
+            <span class="skill-tag">Arduino / C++</span>
+            <span class="skill-tag">Mechanical Design</span>
+          </div>
+          <button type="button" class="project-cta">Read more <span class="arrow">→</span></button>
+        </div>
+        <template class="project-modal-data">
+          <div class="modal-meta">
+            <span class="accent">Embedded Hardware</span>
+            <span class="divider">/</span>
+            <span>Cornerstone 2</span>
+            <span class="divider">/</span>
+            <span>Complete</span>
+            <span class="divider">/</span>
+            <span>Team of 4</span>
+          </div>
+          <h3 class="modal-title">Medispenser</h3>
+          <div class="modal-gallery">
+            <div class="modal-photo"><img src="./pill-1.jpg" alt="Medispenser"></div>
+            <div class="modal-photo"><img src="./pill-2.png" alt="Medispenser CAD"></div>
+          </div>
+          <div class="modal-body">
+            <div class="modal-desc">
+              <p>An automated pill dispenser designed for use in clinical and assisted care environments. An RFID reader looks up the patient's prescription, and three slotted-disk hoppers driven by steppers dispense the correct combination and dosage, with an Arduino-controlled LCD guiding the nurse or caregiver through the workflow.</p>
+              <p>Built with a team of four for Cornerstone 2. The final prototype achieved <strong>100% dispensing accuracy across 100 trials</strong> of three patient prescriptions, exceeding the 95% initial target. Total build cost: ~$70.</p>
+              <p>For this project I worked on CAD design, 3D printing, and laser cutting. I assembled the Arduino components of the system and programmed the controller using Arduino C++.</p>
+            </div>
+            <div class="modal-sidebar">
+              <div class="modal-side-label">Skills</div>
+              <ul class="modal-skills-list">
+                <li>SolidWorks</li>
+                <li>3D Printing</li>
+                <li>Laser Cutting</li>
+                <li>Mechanical Design</li>
+                <li>Hardware Integration</li>
+                <li>Arduino / C++</li>
+              </ul>
+            </div>
+          </div>
+        </template>
+      </article>
+      <article class="project">
+        <div class="project-image">
+          <img src="./bridge-1.jpg" alt="Hyatt Regency walkway collapse exhibit" onerror="this.style.display='none'">
+        </div>
+        <div class="project-content">
+          <div class="project-meta-top">
+            <span class="project-type-badge">Structural / Exhibit</span>
+            <span class="divider">/</span>
+            <span>Cornerstone 1</span>
+            <span class="divider">/</span>
+            <span>Complete</span>
+          </div>
+          <h3 class="project-title">Engineering Disaster Game</h3>
+          <p class="project-desc">
+            A three-stage interactive exhibit teaching 4th–5th graders about the Hyatt Regency Walkway
+            Collapse. Combines a Python narrative game, a laser-cut bridge puzzle, and a Raspberry Pi Pico–driven
+            3D bridge that physically collapses when overloaded — with LCD readout and an LED warning strip.
+          </p>
+          <div class="project-skills">
+            <span class="skill-tag">AutoCAD</span>
+            <span class="skill-tag">Adobe Illustrator</span>
+            <span class="skill-tag">Laser Cutting</span>
+            <span class="skill-tag">Raspberry Pi Pico</span>
+            <span class="skill-tag">Python</span>
+          </div>
+          <button type="button" class="project-cta">Read more <span class="arrow">→</span></button>
+        </div>
+        <template class="project-modal-data">
+          <div class="modal-meta">
+            <span class="accent">Structural / Interactive Exhibit</span>
+            <span class="divider">/</span>
+            <span>Cornerstone 1</span>
+            <span class="divider">/</span>
+            <span>Complete</span>
+            <span class="divider">/</span>
+            <span>Team of 3</span>
+          </div>
+          <h3 class="modal-title">Engineering Disaster Game</h3>
+          <div class="modal-gallery">
+            <div class="modal-photo"><img src="./bridge-1.jpg" alt="Bridge exhibit"></div>
+            <div class="modal-photo"><img src="./bridge-2.png" alt="Bridge exhibit detail"></div>
+          </div>
+          <div class="modal-body">
+            <div class="modal-desc">
+              <p>A three-stage interactive exhibit teaching 4th–5th graders about the Hyatt Regency Walkway Collapse — one of the deadliest structural failures in U.S. history, caused by a single overlooked connection detail in the suspended walkways.</p>
+              <p>Built with a team of three, the exhibit combined a Python narrative game, a laser-cut 2D bridge puzzle showing the original (failed) versus corrected designs, and a Raspberry Pi Pico–driven 3D bridge that physically collapses when overloaded, with LCD weight readout and an LED warning strip.</p>
+              <p>My contribution was the AutoCAD design and laser cutting of the puzzle, Pico enclosure, and model bridge. I worked with my teammates to integrate the Pico components and ensure the Python code worked with our model.</p>
+            </div>
+            <div class="modal-sidebar">
+              <div class="modal-side-label">Skills</div>
+              <ul class="modal-skills-list">
+                <li>2D CAD (AutoCAD)</li>
+                <li>Adobe Illustrator</li>
+                <li>Laser Cutting</li>
+                <li>Raspberry Pi Pico</li>
+                <li>Python</li>
+                <li>Team Collaboration</li>
+              </ul>
+            </div>
+          </div>
+        </template>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer class="footer" id="contact">
+    <h2 class="footer-heading">Contact <span class="italic">Information</span></h2>
+    <div class="footer-links">
+      <a class="footer-link" href="mailto:aiden@kunsch.com">Email <span class="arrow">↗</span></a>
+      <a class="footer-link" href="https://www.linkedin.com/in/aiden-kunsch-40674635a" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+      <a class="footer-link" href="https://aidenkunsch.com/resume/">Resume <span class="arrow">↗</span></a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Aiden Kunsch</span>
+      <span>Boston, MA</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- PROJECT MODAL -->
+<div class="modal-overlay" id="project-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="modal" role="document">
+    <button type="button" class="modal-close" aria-label="Close" id="modal-close">✕</button>
+    <div class="modal-inner" id="modal-inner"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const overlay = document.getElementById('project-modal');
+  const inner = document.getElementById('modal-inner');
+  const closeBtn = document.getElementById('modal-close');
+
+  function openModal(template) {
+    inner.innerHTML = '';
+    inner.appendChild(template.content.cloneNode(true));
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    // reset scroll
+    overlay.querySelector('.modal').scrollTop = 0;
+  }
+
+  function closeModal() {
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    // clear after transition
+    setTimeout(() => { inner.innerHTML = ''; }, 300);
+  }
+
+  // Wire up each Read more button
+  document.querySelectorAll('.project').forEach(article => {
+    const btn = article.querySelector('.project-cta');
+    const tpl = article.querySelector('.project-modal-data');
+    if (btn && tpl) {
+      btn.addEventListener('click', () => openModal(tpl));
+    }
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+  });
+})();
+</script>
+
+</body>
+</html>
