@@ -176,6 +176,14 @@ body {
   min-height: 300px;
 }
 .project-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.project-image.is-placeholder {
+  display: flex; align-items: center; justify-content: center;
+}
+.project-image.is-placeholder span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-faint);
+}
 
 .project-content {
   padding: 40px;
@@ -466,7 +474,7 @@ body.modal-open { overflow: hidden; }
             <div class="modal-block-text">
               <h4 class="modal-block-heading">Background</h4>
               <div class="modal-desc">
-                <p>The rover's original wheels deformed under load and would interfere with ground clearance the life detection system — an issue that we ran into during the University Rover Competition in Utah. The lack of rigidity in the wheels also negatively affected maneuverability of the rover. I redesigned the wheels to improve stiffness and increae ground clearance, while reducing weight and improving traction.</p>
+                <p>The rover's original wheels deformed under load and would interfere with ground clearance the life detection system — an issue that we ran into during the University Rover Competition in Utah. The lack of rigidity in the wheels also negatively affected maneuverability of the rover. I redesigned the wheels to improve stiffness and increae ground clearance, while reducing weight and improving traction. The new wheels had to hold their shape under load without compromising traction.</p>
               </div>
             </div>
             <div class="modal-block-photo">
@@ -484,23 +492,22 @@ body.modal-open { overflow: hidden; }
             </div>
             <div class="modal-block-photo">
               <div class="modal-photo"><img src="../rover-5.jpeg" alt="Wheel redesign detail"></div>
-              </div>
             </div>
           </div>
 
-          <!-- BLOCK 3 — text left / photo right (now a 2-photo grid) -->
+          <!-- BLOCK 3 — text left / photo right (2-photo grid) -->
           <div class="modal-block">
             <div class="modal-block-text">
               <h4 class="modal-block-heading">Result</h4>
               <div class="modal-desc">
                 <p>After a design and material had been selected, I manufactured the wheels using a large format FDM 3D printer. The redesign resulted in stiffer, more maneuverable wheels that don't cause issues with the rover's life detection system. The new design reduced overall weight of the wheels by 400 grams.</p>
+                <p>The stiffer wheel is easier to control, with no negative impact on traction, and its deformation no longer hinders the rover's ground clearance.</p>
               </div>
             </div>
             <div class="modal-block-photo">
               <div class="modal-photo-grid">
                 <div class="modal-photo"><img src="../rover-3.png" alt="Wheel redesign detail"></div>
                 <div class="modal-photo"><img src="../wheel.JPEG" alt="Finished wheel"></div>
-              </div>
               </div>
             </div>
           </div>
@@ -548,7 +555,7 @@ body.modal-open { overflow: hidden; }
             <div class="modal-block-text">
               <h4 class="modal-block-heading">Background</h4>
               <div class="modal-desc">
-                <p>The competition's equipment servicing task requires the rover to plug connectors — including a USB drive and an XLR connector — into a mock lander panel, which demands more dexterity and alignment tolerance than the original gripper design allowed.</p>
+                <p>The competition's equipment servicing task requires the rover to plug connectors — including a USB drive and an XLR connector — into a mock lander panel, which demands more dexterity and alignment tolerance than the original gripper design allowed. The XLR interface also could not interfere with the gripper's other functions, and the protruding mount had to withstand the force of inserting and twisting the connector.</p>
               </div>
             </div>
             <div class="modal-block-photo">
@@ -556,18 +563,18 @@ body.modal-open { overflow: hidden; }
             </div>
           </div>
 
-          <!-- BLOCK 2 — photo left / text right (placeholder replaced with XLR photo) -->
+          <!-- BLOCK 2 — photo left / text right -->
           <div class="modal-block reverse">
             <div class="modal-block-text">
-              <h4 class="modal-block-heading">Design & Result</h4>
+              <h4 class="modal-block-heading">Design &amp; Result</h4>
               <div class="modal-desc">
+                <p>I designed the XLR plug mount in SolidWorks, integrated it with the original gripper, and tested it on a mock terminal to confirm it did not interfere with the gripper's other functions. The mount was fabricated with FDM printing.</p>
                 <p>I redesigned the end effector to allow for insertion of a USB C cable at the University Rover Challenge, and insertion of an XLR cable at the Canadian International Rover Challenge. The design used M2 fasteners and heat set inserts to secure the XLR cable to the end effector. At the competition, I succesfully inserted the XLR cable into a linux terminal, which gained the team points for completion of that task.</p>
+                <p>With me operating the end effector, we inserted the XLR connector and read data from the Linux terminal, and the team placed 2nd overall at the competition. The modification did not interfere with the gripper's other functions.</p>
               </div>
             </div>
             <div class="modal-block-photo">
               <div class="modal-photo"><img src="../XLR.JPEG" alt="XLR connector insertion"></div>
-            </div>
-          </div>
             </div>
           </div>
         </template>
@@ -575,8 +582,8 @@ body.modal-open { overflow: hidden; }
 
       <!-- SWERVE DRIVE -->
       <article class="project">
-        <div class="project-image">
-          <img src="../swerve-1.jpg" alt="Over-wheel swerve drive redesign" onerror="this.style.display='none'">
+        <div class="project-image is-placeholder">
+          <span>Coming Soon</span>
         </div>
         <div class="project-content">
           <h3 class="project-title">Over-Wheel Swerve Drive</h3>
@@ -614,12 +621,13 @@ body.modal-open { overflow: hidden; }
             <div class="modal-block-text">
               <h4 class="modal-block-heading">Background</h4>
               <div class="modal-desc">
-                <p>The current swerve drive mounts the steering motor below the wheel, near the ground. This puts the full steering load on a long moment arm and leaves the motor controller exposed to dirt, water, and impacts at wheel height — a reliability risk during competition.</p>
+                <p>The current swerve drive mounts the steering motor below the wheel, near the ground. This puts the full steering load on a long moment arm and leaves the motor controller exposed to dirt, water, and impacts at wheel height — a reliability risk during competition. 
+                  <p>I am currently working on designing and fabricating an over-wheel swerve drive system, where the steering motor is located above the wheel. I am designing a new frame for the swerve drive, which will be waterjet cut out of aluminum. I am also designing a new swerve motor frame and output shaft, an interface between the motor and strain wave gearbox, and a passthrough tube for control and power wires. I am selecting the motors and gearboxes for this project based on power requierments, form factor restrictions, and torque requierments. Soon, I will start designing components for the new drive system, building around Kraken X44s, and fabricating parts for the swerve motor and drive system. 
               </div>
             </div>
             <div class="modal-block-photo">
               <div class="modal-photo is-placeholder">
-                <span style="color:#ef4444; font-weight:600; letter-spacing:0.1em;">IN PROGRESS</span>
+                <span style="color:var(--text-faint); font-weight:600; letter-spacing:0.1em; text-transform:uppercase;">Coming Soon</span>
               </div>
             </div>
           </div>
@@ -629,13 +637,13 @@ body.modal-open { overflow: hidden; }
             <div class="modal-block-text">
               <h4 class="modal-block-heading">Design Approach</h4>
               <div class="modal-desc">
-                <p>Moving the drive over the wheel shortens the moment arm between the steering axis and the motor, cutting the torque the motor has to resist and reducing wear on the steering assembly. It also lifts the motor controller up off the ground plane, away from dust and debris, improving reliability in the field.</p>
+                <p>Moving the drive over the wheel shortens the moment arm between the steering axis and the motor, cutting the torque the motor has to resist and reducing wear on the steering assembly. It also lifts the motor controller up off the ground plane, away from dust and debris, reducing failure points and improving reliability.</p>
                 <p>This project is currently in progress — CAD and prototype photos will be added as the design is finalized.</p>
               </div>
             </div>
             <div class="modal-block-photo">
               <div class="modal-photo is-placeholder">
-                <span style="color:#ef4444; font-weight:600; letter-spacing:0.1em;">IN PROGRESS</span>
+                <span style="color:var(--text-faint); font-weight:600; letter-spacing:0.1em; text-transform:uppercase;">Coming Soon</span>
               </div>
             </div>
           </div>
